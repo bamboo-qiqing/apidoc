@@ -1,6 +1,5 @@
 package com.bamboo.apidoc.autoconfigure;
 
-import java.util.List;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -17,7 +16,7 @@ public class ApidocProperties {
   /**
    * 需要扫描的包路径
    */
-  private  String[] packagePath;
+  private  String packagePath;
   /**
    * 项目名
    */
