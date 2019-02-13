@@ -2,6 +2,7 @@ package com.bamboo.apidoc.autoconfigure;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Controller;
 
 /**
  * @Author: GuoQing
@@ -25,4 +26,5 @@ public class ApidocProperties {
    * 项目描述
    */
   private  String description;
+
 }

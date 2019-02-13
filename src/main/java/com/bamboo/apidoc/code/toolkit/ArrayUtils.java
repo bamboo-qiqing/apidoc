@@ -1,5 +1,7 @@
 package com.bamboo.apidoc.code.toolkit;
 
+import java.util.List;
+
 /**
  * @Author: GuoQing
  * @Date: 2019/2/12 21:42
@@ -25,4 +27,16 @@ public class ArrayUtils {
   public static boolean isNotEmpty(Object[] array) {
     return !isEmpty(array);
   }
+
+
+
+  public static boolean isEmpty(List<?> list) {
+    return list == null || list.size()<1;
+  }
+
+
+  public static boolean isNotEmpty(List<?> list) {
+    return !isEmpty(list);
+  }
+
 }

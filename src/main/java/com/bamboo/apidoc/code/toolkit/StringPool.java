@@ -7,7 +7,7 @@ package com.bamboo.apidoc.code.toolkit;
  */
 public interface StringPool {
 
-  String ASTERISK = "*";
-  String COMMA = ",";
-  String SEMICOLON = ";";
+    String ASTERISK = "*";
+    String COMMA = ",";
+    String SEMICOLON = ";";
 }

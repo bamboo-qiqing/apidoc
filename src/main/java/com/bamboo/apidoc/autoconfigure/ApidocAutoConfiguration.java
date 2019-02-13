@@ -1,12 +1,21 @@
 package com.bamboo.apidoc.autoconfigure;
 
 
-import com.bamboo.apidoc.extension.factory.ApidocFactoryBean;
+import com.bamboo.apidoc.annotation.Apidoc;
+import com.bamboo.apidoc.code.model.ProjectInfo;
+import com.bamboo.apidoc.code.toolkit.ArrayUtils;
+import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * @Author: GuoQing
@@ -17,25 +26,53 @@ import org.springframework.util.ObjectUtils;
 @Configuration
 public class ApidocAutoConfiguration {
 
-  /**
-   * apidoc 配置文件
-   */
-  private ApidocProperties properties;
+    /**
+     * apidoc 配置文件
+     */
+    private ApidocProperties properties;
 
-  ApidocAutoConfiguration(ApidocProperties properties) {
-    this.properties = properties;
-  }
-
-  /**
-   * apidoc工厂bean配置
-   */
-  @Bean
-  @ConditionalOnMissingBean
-  public ApidocFactoryBean apiDocFactory() {
-    ApidocFactoryBean factory = new ApidocFactoryBean();
-    if (!ObjectUtils.isEmpty(this.properties.getPackagePath())) {
-      factory.setPackagePath(this.properties.getPackagePath());
+    ApidocAutoConfiguration(ApidocProperties properties) {
+        this.properties = properties;
     }
-    return factory;
-  }
+
+    /**
+     * apidoc工厂bean配置
+     */
+    @Bean(name = "apidocFactory")
+    @ConditionalOnMissingBean
+    public ApidocFactoryBean apiDocFactory() {
+        ApidocFactoryBean factory = new ApidocFactoryBean();
+        if (!ObjectUtils.isEmpty(this.properties.getPackagePath())) {
+            factory.setPackagePath(this.properties.getPackagePath());
+        }
+        return factory;
+    }
+
+    @Bean(name = "projectInfo")
+    @ConditionalOnBean(ApidocFactoryBean.class)
+    public ProjectInfo getProjectInfo(@Autowired ApidocFactoryBean  apidocFactory){
+        ProjectInfo projectInfo = new ProjectInfo();
+        if (!ObjectUtils.isEmpty(this.properties.getTitle())) {
+            projectInfo.setName(this.properties.getTitle());
+        }
+        if (!ObjectUtils.isEmpty(this.properties.getDescription())) {
+            projectInfo.setDescription(this.properties.getDescription());
+        }
+        List<Class<?>> packagePathClass = apidocFactory.getPackagePathClass();
+        if(ArrayUtils.isNotEmpty(packagePathClass)){
+            for (Class<?> packagePathClas:packagePathClass) {
+                Method[] methods = packagePathClas.getMethods();
+                for ( Method method: methods){
+
+                    Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
+                    for ( Annotation declaredAnnotation: declaredAnnotations){
+
+                        System.out.println(declaredAnnotation.toString());
+                    }
+
+                }
+            }
+        }
+        return  projectInfo;
+    }
 }
