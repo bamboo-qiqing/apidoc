@@ -1,9 +1,9 @@
 package com.bamboo.apidoc.autoconfigure;
 
 
-import com.bamboo.apidoc.annotation.Apidoc;
 import com.bamboo.apidoc.code.model.ProjectInfo;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
+import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -12,8 +12,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
-
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class ApidocAutoConfiguration {
 
     @Bean(name = "projectInfo")
     @ConditionalOnBean(ApidocFactoryBean.class)
-    public ProjectInfo getProjectInfo(@Autowired ApidocFactoryBean  apidocFactory){
+    public ProjectInfo getProjectInfo(@Autowired ApidocFactoryBean apidocFactory) {
         ProjectInfo projectInfo = new ProjectInfo();
         if (!ObjectUtils.isEmpty(this.properties.getTitle())) {
             projectInfo.setName(this.properties.getTitle());
@@ -59,20 +57,16 @@ public class ApidocAutoConfiguration {
             projectInfo.setDescription(this.properties.getDescription());
         }
         List<Class<?>> packagePathClass = apidocFactory.getPackagePathClass();
-        if(ArrayUtils.isNotEmpty(packagePathClass)){
-            for (Class<?> packagePathClas:packagePathClass) {
+        if (ArrayUtils.isNotEmpty(packagePathClass)) {
+            for (Class<?> packagePathClas : packagePathClass) {
                 Method[] methods = packagePathClas.getMethods();
-                for ( Method method: methods){
+                for (Method method : methods) {
+                    if(MethodUtil.isApidocMethodAnnotation(method)){
 
-                    Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
-                    for ( Annotation declaredAnnotation: declaredAnnotations){
-
-                        System.out.println(declaredAnnotation.toString());
                     }
-
                 }
             }
         }
-        return  projectInfo;
+        return projectInfo;
     }
 }

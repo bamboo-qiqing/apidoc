@@ -19,8 +19,9 @@ public class ModuleInfo {
      * 模块描述
      */
     private String  description;
+
     /**
-     * 路由文件集合
+     * 接口集合
      */
-    List<RoutClass> classList;
+    private List<RoutMethod> methods;
 }

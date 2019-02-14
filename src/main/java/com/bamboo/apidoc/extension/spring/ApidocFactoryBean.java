@@ -7,7 +7,6 @@ import com.bamboo.apidoc.code.toolkit.StringPool;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
 import com.bamboo.apidoc.extension.toolkit.PackageHelper;
 
-import java.lang.annotation.Annotation;
 import java.util.*;
 
 import lombok.Data;
