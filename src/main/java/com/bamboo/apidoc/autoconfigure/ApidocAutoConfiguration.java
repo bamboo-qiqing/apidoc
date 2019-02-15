@@ -2,8 +2,6 @@ package com.bamboo.apidoc.autoconfigure;
 
 
 import com.bamboo.apidoc.code.model.ProjectInfo;
-import com.bamboo.apidoc.code.toolkit.ArrayUtils;
-import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -12,9 +10,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
-import java.lang.reflect.Method;
-import java.util.List;
-
 /**
  * @Author: GuoQing
  * @Date: 2019/2/2 11:07
@@ -23,6 +18,7 @@ import java.util.List;
 @EnableConfigurationProperties(ApidocProperties.class)
 @Configuration
 public class ApidocAutoConfiguration {
+
 
     /**
      * apidoc 配置文件
@@ -56,17 +52,8 @@ public class ApidocAutoConfiguration {
         if (!ObjectUtils.isEmpty(this.properties.getDescription())) {
             projectInfo.setDescription(this.properties.getDescription());
         }
-        List<Class<?>> packagePathClass = apidocFactory.getPackagePathClass();
-        if (ArrayUtils.isNotEmpty(packagePathClass)) {
-            for (Class<?> packagePathClas : packagePathClass) {
-                Method[] methods = packagePathClas.getMethods();
-                for (Method method : methods) {
-                    if(MethodUtil.isApidocMethodAnnotation(method)){
-
-                    }
-                }
-            }
-        }
+        projectInfo.buildProjectInfoFactory(apidocFactory);
+//        System.out.println(JSONObject.toJSON(projectInfo));
         return projectInfo;
     }
 }

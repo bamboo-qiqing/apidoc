@@ -20,5 +20,4 @@ public class StringUtils {
         }
         return target;
     }
-
 }

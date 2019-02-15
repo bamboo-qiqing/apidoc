@@ -45,14 +45,12 @@ public class RoutMethod {
     private List<RoutParam> params;
 
 
-    RoutMethod(Method method) {
-        this.buildRoutMethod(method);
-    }
-
-    private void buildRoutMethod(Method method) {
-        this.name = method.getName();
-        this.packageName = method.getClass().getPackage().getName();
-        this.className = method.getClass().getName();
-        this.methodType = MethodUtil.getRequestMethod(method);
+   public static RoutMethod buildRoutMethod(Method method, Class<?> packagePathClass) {
+        RoutMethod routMethod = new RoutMethod();
+        routMethod.setName(method.getName());
+        routMethod.setPackageName(packagePathClass.getPackage().getName());
+        routMethod.setClassName( packagePathClass.getName());
+        routMethod.setMethodType(MethodUtil.getRequestMethod(method));
+        return routMethod;
     }
 }

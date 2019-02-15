@@ -21,7 +21,7 @@ public class ApidocApplication {
   }
 
   @Apidoc
-  @RequestMapping
+  @GetMapping
   public void as(){
 
   }

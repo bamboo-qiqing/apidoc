@@ -30,6 +30,17 @@
       <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
       <!--<version>${baomidou.mybatisplus.version}</version>-->
     <!--</dependency>-->
+
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>4.4.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.terran4j</groupId>
+      <artifactId>terran4j-commons-api2doc</artifactId>
+      <version>1.0.2</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
@@ -47,6 +58,11 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.54</version>
     </dependency>
   </dependencies>
 

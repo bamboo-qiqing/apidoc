@@ -2,7 +2,6 @@ package com.bamboo.apidoc.extension.toolkit;
 
 import com.bamboo.apidoc.annotation.Apidoc;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -13,6 +12,7 @@ import java.util.*;
  * @description 注解过滤工具类
  */
 public class AnnotaionFilter {
+    //TODO 待改善
     @SuppressWarnings({"serial"})
     public final static Map<String, Class<?>> needFilters = new HashMap<String, Class<?>>() {{
         put("com.bamboo.apidoc.annotation.Apidoc", Apidoc.class);

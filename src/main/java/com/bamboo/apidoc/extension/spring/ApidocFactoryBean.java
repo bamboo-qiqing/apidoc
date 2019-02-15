@@ -3,18 +3,23 @@ package com.bamboo.apidoc.extension.spring;
 import static org.springframework.util.StringUtils.hasLength;
 import static org.springframework.util.StringUtils.tokenizeToStringArray;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.file.FileWriter;
+import com.alibaba.fastjson.JSONObject;
+import com.bamboo.apidoc.code.model.ModuleInfo;
+import com.bamboo.apidoc.code.model.ProjectInfo;
 import com.bamboo.apidoc.code.toolkit.StringPool;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
 import com.bamboo.apidoc.extension.toolkit.PackageHelper;
-
+import java.io.File;
 import java.util.*;
-
 import lombok.Data;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.util.ResourceUtils;
 
 /**
  * @Author: GuoQing
@@ -35,7 +40,7 @@ public class ApidocFactoryBean implements InitializingBean {
      */
     String packagePath;
     /**
-     *扫描指定注解得到的类
+     * 扫描指定注解得到的类
      */
     List<Class<?>> packagePathClass;
 
@@ -70,7 +75,20 @@ public class ApidocFactoryBean implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() {
+    public void afterPropertiesSet() throws Exception {
+        //TODO 待改善
         this.buildApidocFactory();
+        ProjectInfo projectInfo = new ProjectInfo();
+        projectInfo.setStartTime(DateUtil.now());
+        List<ModuleInfo> objects = new ArrayList<>();
+        objects.add(new ModuleInfo(ModuleInfo.UNALLOCATED,"当前模块为未曾分配的接口集合",null));
+        projectInfo.setModules(objects);
+        String path = ResourceUtils.getURL("").getPath() + "doc/apidoc.json";
+        boolean exist = FileUtil.exist(path);
+        if(!exist){
+            File file = FileUtil.touch(path);
+            FileWriter fileWriter = FileWriter.create(file);
+            fileWriter.write(JSONObject.toJSON(projectInfo).toString());
+        }
     }
 }

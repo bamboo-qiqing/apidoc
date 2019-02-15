@@ -11,17 +11,27 @@ import java.util.List;
  */
 @Data
 public class ModuleInfo {
+
+
+    public final static String UNALLOCATED = "未分配";
     /**
      * 模块名
      */
-    private String  name;
+    private String name;
     /**
      * 模块描述
      */
-    private String  description;
+    private String description;
 
     /**
      * 接口集合
      */
     private List<RoutMethod> methods;
+    ModuleInfo(){
+    }
+    public ModuleInfo(String name, String description, List<RoutMethod> methods) {
+        this.name = name;
+        this.description = description;
+        this.methods = methods;
+    }
 }
