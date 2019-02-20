@@ -4,7 +4,7 @@ import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.lang.reflect.Method;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @description 路由方法详情
  */
 @Data
-public class RoutMethod {
+public class Method {
     /**
      * 方法名
      */
@@ -32,6 +32,10 @@ public class RoutMethod {
      */
     private String chineseName;
     /**
+     * 接口地址
+     */
+    private String routPath;
+    /**
      * 方法类型
      */
     private RequestMethod[] methodType;
@@ -42,15 +46,18 @@ public class RoutMethod {
     /**
      * 方法参数
      */
-    private List<RoutParam> params;
+    private List<Param> params;
 
 
-   public static RoutMethod buildRoutMethod(Method method, Class<?> packagePathClass) {
-        RoutMethod routMethod = new RoutMethod();
+   public static Method buildRoutMethod(java.lang.reflect.Method method, Class<?> packagePathClass) {
+        Method routMethod = new Method();
         routMethod.setName(method.getName());
         routMethod.setPackageName(packagePathClass.getPackage().getName());
         routMethod.setClassName( packagePathClass.getName());
         routMethod.setMethodType(MethodUtil.getRequestMethod(method));
+       final Annotation[] annotations = packagePathClass.getAnnotations();
+
+//       routMethod.setRoutPath();
         return routMethod;
     }
 }

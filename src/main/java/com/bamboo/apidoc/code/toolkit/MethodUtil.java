@@ -1,10 +1,8 @@
 package com.bamboo.apidoc.code.toolkit;
 
 import com.bamboo.apidoc.annotation.Apidoc;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -38,6 +36,8 @@ public class MethodUtil {
     }
 
 
+
+
     /**
      * 判断方法是否含有指定注解
      *
@@ -53,6 +53,7 @@ public class MethodUtil {
         classes.add(RequestMapping.class);
         return isAnnotation(classes, method);
     }
+
 
     /**
      * 获取当前方法的request类型9/

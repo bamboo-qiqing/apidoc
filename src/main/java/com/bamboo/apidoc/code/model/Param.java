@@ -8,7 +8,7 @@ import lombok.Data;
  * @description 路由参数详情
  */
 @Data
-public class RoutParam {
+public class Param {
 
     /**
      * 参数名

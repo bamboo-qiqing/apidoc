@@ -6,19 +6,23 @@ import static org.springframework.util.StringUtils.tokenizeToStringArray;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileWriter;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bamboo.apidoc.code.model.ModuleInfo;
-import com.bamboo.apidoc.code.model.ProjectInfo;
+import com.bamboo.apidoc.code.model.Module;
+import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.code.toolkit.StringPool;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
 import com.bamboo.apidoc.extension.toolkit.PackageHelper;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.util.ResourceUtils;
 
 /**
@@ -28,6 +32,8 @@ import org.springframework.util.ResourceUtils;
  */
 @Data
 public class ApidocFactoryBean implements InitializingBean {
+    @Value("classpath:/apidoc/apidoc.json")
+    private Resource areaRes;
 
     private static final Log LOGGER = LogFactory.getLog(ApidocFactoryBean.class);
     /**
@@ -43,6 +49,8 @@ public class ApidocFactoryBean implements InitializingBean {
      * 扫描指定注解得到的类
      */
     List<Class<?>> packagePathClass;
+
+    private  Project project;
 
     public void buildApidocFactory() {
         if (hasLength(this.packagePath)) {
@@ -78,17 +86,16 @@ public class ApidocFactoryBean implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         //TODO 待改善
         this.buildApidocFactory();
-        ProjectInfo projectInfo = new ProjectInfo();
-        projectInfo.setStartTime(DateUtil.now());
-        List<ModuleInfo> objects = new ArrayList<>();
-        objects.add(new ModuleInfo(ModuleInfo.UNALLOCATED,"当前模块为未曾分配的接口集合",null));
-        projectInfo.setModules(objects);
-        String path = ResourceUtils.getURL("").getPath() + "doc/apidoc.json";
+        Project project = new Project();
+        project.setStartTime(DateUtil.now());
+        List<Module> objects = new ArrayList<>();
+        objects.add(new Module(Module.UNALLOCATED,"当前模块为未曾分配的接口集合",null));
+        project.setModules(objects);
+        String path = ResourceUtils.getURL("").getPath() + "src/main/resources/doc/apidoc.json";
         boolean exist = FileUtil.exist(path);
         if(!exist){
-            File file = FileUtil.touch(path);
-            FileWriter fileWriter = FileWriter.create(file);
-            fileWriter.write(JSONObject.toJSON(projectInfo).toString());
+            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),"classpath:/apidoc/apidoc.json");
         }
+        this.project = JSON.parseObject(areaRes.getInputStream(), StandardCharsets.UTF_8, Project.class);
     }
 }

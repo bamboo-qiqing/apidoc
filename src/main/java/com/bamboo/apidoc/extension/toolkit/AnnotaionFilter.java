@@ -12,13 +12,15 @@ import java.util.*;
  * @description 注解过滤工具类
  */
 public class AnnotaionFilter {
+
     //TODO 待改善
-    @SuppressWarnings({"serial"})
-    public final static Map<String, Class<?>> needFilters = new HashMap<String, Class<?>>() {{
-        put("com.bamboo.apidoc.annotation.Apidoc", Apidoc.class);
-        put("org.springframework.web.bind.annotation.RestController", RestController.class);
-        put("org.springframework.stereotype.Controller", Controller.class);
-    }};
+    public final static Map<String, Class<?>> needFilters = new HashMap<>();
+
+    static {
+        needFilters.put("com.bamboo.apidoc.annotation.Apidoc", Apidoc.class);
+        needFilters.put("org.springframework.web.bind.annotation.RestController", RestController.class);
+        needFilters.put("org.springframework.stereotype.Controller", Controller.class);
+    }
 
     public static Boolean filter(Collection<String> annotaionNames) {
 
@@ -31,4 +33,6 @@ public class AnnotaionFilter {
         return Boolean.FALSE;
 
     }
+
+
 }
