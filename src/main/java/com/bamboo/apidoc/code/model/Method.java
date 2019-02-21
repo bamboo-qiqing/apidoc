@@ -1,10 +1,10 @@
 package com.bamboo.apidoc.code.model;
 
+
 import com.bamboo.apidoc.code.toolkit.MethodUtil;
+import com.bamboo.apidoc.code.toolkit.RoutUtil;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 
@@ -49,15 +49,15 @@ public class Method {
     private List<Param> params;
 
 
-   public static Method buildRoutMethod(java.lang.reflect.Method method, Class<?> packagePathClass) {
+    public static Method buildRoutMethod(java.lang.reflect.Method method, Class<?> packagePathClass) {
         Method routMethod = new Method();
         routMethod.setName(method.getName());
         routMethod.setPackageName(packagePathClass.getPackage().getName());
-        routMethod.setClassName( packagePathClass.getName());
+        routMethod.setClassName(packagePathClass.getName());
         routMethod.setMethodType(MethodUtil.getRequestMethod(method));
-       final Annotation[] annotations = packagePathClass.getAnnotations();
-
-//       routMethod.setRoutPath();
+        routMethod.setRoutPath(RoutUtil.getRout(method,packagePathClass));
         return routMethod;
     }
+
+
 }

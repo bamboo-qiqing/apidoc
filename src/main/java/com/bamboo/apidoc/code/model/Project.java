@@ -1,7 +1,5 @@
 package com.bamboo.apidoc.code.model;
 
-
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bamboo.apidoc.code.exceptions.ApiDocException;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
@@ -9,12 +7,7 @@ import com.bamboo.apidoc.code.toolkit.ClassUtil;
 import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import lombok.Data;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.util.ResourceUtils;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +18,7 @@ import java.util.List;
  * @description 项目信息
  */
 @Data
-public class Project implements InitializingBean {
+public class Project {
 
 
     /**
@@ -44,9 +37,6 @@ public class Project implements InitializingBean {
      * 模块集合
      */
     private List<Module> modules = new ArrayList<>();
-
-    String path="classpath:/apidoc/apidoc.json";
-
 
     public void buildProjectInfoFactory(ApidocFactoryBean apidocFactory) throws IOException {
         Project project = apidocFactory.getProject();
@@ -73,12 +63,7 @@ public class Project implements InitializingBean {
                 }
             }
         }
-        com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),path);
-
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
+        com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
 
     }
 }

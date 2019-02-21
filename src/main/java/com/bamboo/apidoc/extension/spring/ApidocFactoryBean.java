@@ -91,10 +91,9 @@ public class ApidocFactoryBean implements InitializingBean {
         List<Module> objects = new ArrayList<>();
         objects.add(new Module(Module.UNALLOCATED,"当前模块为未曾分配的接口集合",null));
         project.setModules(objects);
-        String path = ResourceUtils.getURL("").getPath() + "src/main/resources/doc/apidoc.json";
-        boolean exist = FileUtil.exist(path);
+        boolean exist = FileUtil.exist(ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
         if(!exist){
-            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),"classpath:/apidoc/apidoc.json");
+            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
         }
         this.project = JSON.parseObject(areaRes.getInputStream(), StandardCharsets.UTF_8, Project.class);
     }

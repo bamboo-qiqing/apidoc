@@ -1,13 +1,12 @@
 package com.bamboo.apidoc.code.toolkit;
 
+
 import com.bamboo.apidoc.ApidocApplication;
 import com.bamboo.apidoc.annotation.Apidoc;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,13 @@ public class ClassUtil {
 
     /**
      * 判断类是否含有指定注解
+     *
      * @param annotations 指定注解集合
-     * @param clazz      类
+     * @param clazz       类
      * @return 存在返回true 不存在返回false
      */
     public static boolean isAnnotation(List<Class<? extends Annotation>> annotations, Class<?> clazz) {
-        if (clazz == null ) {
+        if (clazz == null) {
             return Boolean.FALSE;
         }
         for (Class<? extends Annotation> annotation : annotations) {
@@ -39,6 +39,7 @@ public class ClassUtil {
 
     /**
      * 判断类是否含有指定注解
+     *
      * @param clazz 类
      * @return 存在返回true 不存在返回false
      */
@@ -51,31 +52,4 @@ public class ClassUtil {
         return isAnnotation(classes, clazz);
     }
 
-    /**
-     * 获取当前方法的request类型/
-     * @param clazz 类
-     * @return
-     */
-    public static String getRoutPath(  Class<?> clazz) {
-
-        if( clazz.getAnnotation(RestController.class)!=null){
-            RestController annotation = clazz.getAnnotation(RestController.class);
-            return annotation.value();
-        }
-        if( clazz.getAnnotation(Controller.class)!=null){
-            Controller annotation = clazz.getAnnotation(Controller.class);
-            return annotation.value();
-        }
-        if( clazz.getAnnotation(Apidoc.class)!=null){
-            Apidoc annotation = clazz.getAnnotation(Apidoc.class);
-            return annotation.value();
-        }
-
-        return "";
-    }
-
-    public static void main(String[] args) {
-        getRoutPath(ApidocApplication.class);
-
-    }
 }

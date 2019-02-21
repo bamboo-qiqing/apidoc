@@ -1,21 +1,19 @@
 package com.bamboo.apidoc.autoconfigure;
 
 
-import com.alibaba.fastjson.JSON;
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
+
 import org.springframework.util.ObjectUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+
 
 /**
  * @Author: GuoQing

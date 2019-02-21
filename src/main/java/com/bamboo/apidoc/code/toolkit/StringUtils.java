@@ -1,8 +1,6 @@
 package com.bamboo.apidoc.code.toolkit;
 
 
-
-
 /**
  * @Author: GuoQing
  * @Date: 2019/2/12 21:55
@@ -23,5 +21,22 @@ public class StringUtils {
         return target;
     }
 
-
+    /**
+     * 为字符串指定特定的字符开头
+     * @param prefix 字符串
+     * @param starts  指定开头
+     * @return 处理过的String
+     */
+    public static String startsWith(String prefix, String starts) {
+        String pre = "";
+        if (prefix == null || prefix == "") {
+            return pre;
+        }
+        if (!prefix.startsWith(starts)) {
+            pre = starts + prefix;
+        }else{
+            pre =prefix;
+        }
+        return  pre;
+    }
 }

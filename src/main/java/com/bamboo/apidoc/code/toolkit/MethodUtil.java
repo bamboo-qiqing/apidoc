@@ -36,8 +36,6 @@ public class MethodUtil {
     }
 
 
-
-
     /**
      * 判断方法是否含有指定注解
      *
@@ -69,15 +67,16 @@ public class MethodUtil {
         }
         PostMapping post = method.getAnnotation(PostMapping.class);
         if (post != null) {
-            return new RequestMethod[]{RequestMethod.GET};
+            return new RequestMethod[]{RequestMethod.POST};
         }
         RequestMapping request = method.getAnnotation(RequestMapping.class);
-
         if (request != null) {
             return request.method();
         }
-
         return null;
     }
+
+
+
 
 }
