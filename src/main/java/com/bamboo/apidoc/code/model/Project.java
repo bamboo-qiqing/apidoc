@@ -1,13 +1,13 @@
 package com.bamboo.apidoc.code.model;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bamboo.apidoc.autoconfigure.ApidocProperties;
 import com.bamboo.apidoc.code.exceptions.ApiDocException;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
 import com.bamboo.apidoc.code.toolkit.ClassUtil;
 import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import lombok.Data;
-import org.springframework.util.ResourceUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class Project {
                 }
             }
         }
-        com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
+        com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project), ApidocProperties.jsonFilePath);
 
     }
 }

@@ -47,7 +47,7 @@ public class MethodUtil {
         List<Class<? extends Annotation>> classes = new ArrayList<>();
         classes.add(Apidoc.class);
         classes.add(GetMapping.class);
-        classes.add(PostMapping.class);
+        classes.add(DeleteMapping.class);
         classes.add(RequestMapping.class);
         return isAnnotation(classes, method);
     }

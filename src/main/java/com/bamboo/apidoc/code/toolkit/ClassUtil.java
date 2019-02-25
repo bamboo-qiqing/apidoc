@@ -1,7 +1,6 @@
 package com.bamboo.apidoc.code.toolkit;
 
 
-import com.bamboo.apidoc.ApidocApplication;
 import com.bamboo.apidoc.annotation.Apidoc;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

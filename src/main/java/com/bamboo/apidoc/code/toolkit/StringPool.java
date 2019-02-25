@@ -1,5 +1,7 @@
 package com.bamboo.apidoc.code.toolkit;
 
+import org.springframework.util.ResourceUtils;
+
 /**
  * @Author: GuoQing
  * @Date: 2019/2/12 17:35
@@ -74,7 +76,6 @@ public interface StringPool {
     String HTML_LT = "&lt;";
     String HTML_GT = "&gt;";
 
-    // ---------------------------------------------------------------- array
 
     String[] EMPTY_ARRAY = new String[0];
 

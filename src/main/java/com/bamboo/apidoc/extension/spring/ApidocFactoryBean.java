@@ -8,6 +8,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileWriter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bamboo.apidoc.autoconfigure.ApidocProperties;
 import com.bamboo.apidoc.code.model.Module;
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.code.toolkit.StringPool;
@@ -93,7 +94,7 @@ public class ApidocFactoryBean implements InitializingBean {
         project.setModules(objects);
         boolean exist = FileUtil.exist(ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
         if(!exist){
-            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
+            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),ApidocProperties.jsonFilePath);
         }
         this.project = JSON.parseObject(areaRes.getInputStream(), StandardCharsets.UTF_8, Project.class);
     }

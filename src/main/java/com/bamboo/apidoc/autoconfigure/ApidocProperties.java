@@ -1,7 +1,11 @@
 package com.bamboo.apidoc.autoconfigure;
 
 import lombok.Data;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.util.ResourceUtils;
+
+import java.io.FileNotFoundException;
 
 /**
  * @Author: GuoQing
@@ -11,7 +15,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(value = "bamboo.apidoc")
-public class ApidocProperties {
+public class ApidocProperties implements InitializingBean {
 
   /**
    * 需要扫描的包路径
@@ -26,4 +30,15 @@ public class ApidocProperties {
    */
   private  String description;
 
+  public static String jsonFilePath;
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+      try {
+        jsonFilePath= ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json";
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+
+  }
 }

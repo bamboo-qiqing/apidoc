@@ -1,0 +1,204 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "element-ui@2.4.6",
+        "scope": null,
+        "escapedName": "element-ui",
+        "name": "element-ui",
+        "rawSpec": "2.4.6",
+        "spec": "2.4.6",
+        "type": "version"
+      },
+      "E:\\workspace\\bamboo-cli"
+    ]
+  ],
+  "_cnpm_publish_time": 1533893374943,
+  "_from": "element-ui@2.4.6",
+  "_hasShrinkwrap": false,
+  "_id": "element-ui@2.4.6",
+  "_location": "/element-ui",
+  "_nodeVersion": "8.11.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/element-ui_2.4.6_1533893374805_0.7277121188607978"
+  },
+  "_npmUser": {
+    "name": "zhiyang-deng",
+    "email": "zhiyoung21@gmail.com"
+  },
+  "_npmVersion": "6.1.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "element-ui@2.4.6",
+    "scope": null,
+    "escapedName": "element-ui",
+    "name": "element-ui",
+    "rawSpec": "2.4.6",
+    "spec": "2.4.6",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/element-ui/download/element-ui-2.4.6.tgz",
+  "_shasum": "524d3d4cac0b68745dda87311ef0d8fe541b5fc4",
+  "_shrinkwrap": null,
+  "_spec": "element-ui@2.4.6",
+  "_where": "E:\\workspace\\bamboo-cli",
+  "bugs": {
+    "url": "https://github.com/ElemeFE/element/issues"
+  },
+  "dependencies": {
+    "async-validator": "~1.8.1",
+    "babel-helper-vue-jsx-merge-props": "^2.0.0",
+    "deepmerge": "^1.2.0",
+    "normalize-wheel": "^1.0.1",
+    "resize-observer-polyfill": "^1.5.0",
+    "throttle-debounce": "^1.0.1"
+  },
+  "description": "A Component Library for Vue.js.",
+  "devDependencies": {
+    "algoliasearch": "^3.24.5",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-module-resolver": "^2.2.0",
+    "babel-plugin-syntax-jsx": "^6.8.0",
+    "babel-plugin-transform-vue-jsx": "^3.3.0",
+    "babel-preset-es2015": "^6.14.0",
+    "chai": "^3.5.0",
+    "cheerio": "^0.18.0",
+    "chokidar": "^1.7.0",
+    "copy-webpack-plugin": "^4.1.1",
+    "coveralls": "^2.11.14",
+    "cp-cli": "^1.0.2",
+    "cross-env": "^3.1.3",
+    "css-loader": "^0.28.7",
+    "es6-promise": "^4.0.5",
+    "eslint": "4.14.0",
+    "eslint-config-elemefe": "0.1.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-json": "^1.2.0",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "file-save": "^0.2.0",
+    "gh-pages": "^0.11.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-postcss": "^6.1.1",
+    "gulp-sass": "^3.1.0",
+    "highlight.js": "^9.3.0",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "inject-loader": "^3.0.1",
+    "isparta-loader": "^2.0.0",
+    "json-loader": "^0.5.7",
+    "json-templater": "^1.0.4",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-mocha": "^1.2.0",
+    "karma-sinon-chai": "^1.2.4",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.26",
+    "karma-webpack": "^3.0.0",
+    "lolex": "^1.5.1",
+    "markdown-it": "^6.1.1",
+    "markdown-it-anchor": "^2.5.0",
+    "markdown-it-container": "^2.0.0",
+    "mocha": "^3.1.1",
+    "node-sass": "^4.5.3",
+    "perspective.js": "^1.0.0",
+    "postcss": "^5.1.2",
+    "postcss-loader": "0.11.1",
+    "postcss-salad": "^1.0.8",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "rimraf": "^2.5.4",
+    "sass-loader": "^6.0.6",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "style-loader": "^0.19.0",
+    "transliteration": "^1.1.11",
+    "uppercamelcase": "^1.1.0",
+    "url-loader": "^0.6.2",
+    "vue": "^2.5.2",
+    "vue-loader": "^13.3.0",
+    "vue-markdown-loader": "1",
+    "vue-router": "2.7.0",
+    "vue-template-compiler": "^2.5.2",
+    "vue-template-es2015-compiler": "^1.6.0",
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "524d3d4cac0b68745dda87311ef0d8fe541b5fc4",
+    "size": 1081725,
+    "noattachment": false,
+    "tarball": "http://registry.npm.taobao.org/element-ui/download/element-ui-2.4.6.tgz"
+  },
+  "faas": {
+    "domain": "element",
+    "public": "temp_web/element"
+  },
+  "files": [
+    "lib",
+    "src",
+    "packages",
+    "types"
+  ],
+  "gitHead": "3990d9bdea11585c8444db54c0eed7a4281c059a",
+  "homepage": "http://element.eleme.io",
+  "keywords": [
+    "eleme",
+    "vue",
+    "components"
+  ],
+  "license": "MIT",
+  "main": "lib/element-ui.common.js",
+  "maintainers": [
+    {
+      "name": "yi.yang",
+      "email": "leopoldthecuber@gmail.com"
+    }
+  ],
+  "name": "element-ui",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "vue": "^2.5.2"
+  },
+  "publish_time": 1533893374943,
+  "readme": "<p align=\"center\">\n  <img src=\"https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg\">\n</p>\n\n<p align=\"center\">\n  <a href=\"https://travis-ci.org/ElemeFE/element\">\n    <img src=\"https://travis-ci.org/ElemeFE/element.svg?branch=master\">\n  </a>\n  <a href=\"https://coveralls.io/github/ElemeFE/element?branch=master\">\n    <img src=\"https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master\">\n  </a>\n  <a href=\"https://cdnjs.com/libraries/element-ui\">\n    <img src=\"https://img.shields.io/cdnjs/v/element-ui.svg\">\n  </a>\n  <a href=\"https://www.npmjs.org/package/element-ui\">\n    <img src=\"https://img.shields.io/npm/v/element-ui.svg\">\n  </a>\n  <a href=\"https://npmcharts.com/compare/element-ui?minimal=true\">\n    <img src=\"http://img.shields.io/npm/dm/element-ui.svg\">\n  </a>\n  <br>\n  <a href=\"http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS\">\n    <img src=\"http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS\">\n  </a>\n  <a href=\"http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS\">\n    <img src=\"http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS\">\n  </a>\n  <a href=\"#backers\">\n    <img src=\"https://opencollective.com/element/backers/badge.svg\">\n  </a>\n  <a href=\"#sponsors\">\n    <img src=\"https://opencollective.com/element/sponsors/badge.svg\">\n  </a>\n  <a href=\"LICENSE\">\n    <img src=\"https://img.shields.io/badge/License-MIT-yellow.svg\">\n  </a>\n</p>\n\n<p align=\"center\">\n  <b>Special thanks to the generous sponsorship by:</b>\n</p>\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://tipe.io/?ref=element\" target=\"_blank\">\n          <img width=\"150px\" src=\"https://user-images.githubusercontent.com/1016365/34124854-48fafa06-e3e9-11e7-8c04-251055feebee.png\">\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://www.duotai.cn/?utm_source=element\" target=\"_blank\">\n          <img width=\"140px\" src=\"https://user-images.githubusercontent.com/10095631/39403151-c42dbcee-4ba5-11e8-9c09-8e5283da4144.png\">\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index\" target=\"_blank\">\n          <img width=\"150px\" src=\"https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png\">\n        </a>\n      </td>\n      <td align=\"center\" valign=\"middle\">\n        <a href=\"https://bitsrc.io/\" target=\"_blank\">\n          <img width=\"150px\" src=\"https://user-images.githubusercontent.com/10095631/41342907-e44e7196-6f2f-11e8-92f2-47702dc8f059.png\">\n        </a>\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n> A Vue.js 2.0 UI Toolkit for Web.\n\n## Links\n- Homepage and documentation\n  - [International users](http://element.eleme.io/#/en-US)\n  - [Chinese users](http://element-cn.eleme.io/#/zh-CN)\n  - [Spanish users](http://element.eleme.io/#/es)\n- [awesome-element](https://github.com/ElementUI/awesome-element)\n- [FAQ](./FAQ.md)\n- [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)\n- [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)\n- [Element for React](https://github.com/elemefe/element-react)\n- [Element for Angular](https://github.com/ElemeFE/element-angular)\n- [Atom helper](https://github.com/ElemeFE/element-helper)\n- [Visual Studio Code helper](https://github.com/ElemeFE/vscode-element-helper)\n- Starter kit\n  - [element-starter](https://github.com/ElementUI/element-starter)\n  - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)\n- [Design resources](https://github.com/ElementUI/Resources)\n- Gitter\n  - [International users](https://gitter.im/element-en/Lobby)\n  - [Chinese users](https://gitter.im/ElemeFE/element)\n\n## Install\n```shell\nnpm install element-ui -S\n```\n\n## Quick Start\n``` javascript\nimport Vue from 'vue'\nimport Element from 'element-ui'\n\nVue.use(Element)\n\n// or\nimport {\n  Select,\n  Button\n  // ...\n} from 'element-ui'\n\nVue.component(Select.name, Select)\nVue.component(Button.name, Button)\n```\nFor more information, please refer to [Quick Start](http://element.eleme.io/#/en-US/component/quickstart) in our documentation.\n\n## Browser Support\nModern browsers and Internet Explorer 10+.\n\n## Development\nSkip this part if you just want to use Element.\n\nFor those who are interested in contributing to Element, please refer to our contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) to see how to run this project.\n\n## Changelog\nDetailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).\n\n## FAQ\nWe have collected some [frequently asked questions](https://github.com/ElemeFE/element/blob/master/FAQ.md). Before reporting an issue, please search if the FAQ has the answer to your problem.\n\n## Contribution\nPlease make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) before making a pull request.\n\n## Special Thanks\nEnglish documentation is brought to you by SwiftGG Translation Team:\n- [raychenfj](https://github.com/raychenfj)\n- [kevin](http://thekevin.cn/)\n- [曾小涛](https://github.com/zengxiaotao)\n- [湾仔王二](https://github.com/wanzaiwanger)\n- [BlooDLine](http://www.ibloodline.com/)\n- [陈铭嘉](https://chenmingjia.github.io/)\n- [千叶知风](http://mpc6.com/)\n- [梁杰](http://numbbbbb.com)\n- [Changing](https://github.com/sunzhuo11)\n- [mmoaay](https://github.com/mmoaay)\n\nSpanish documentation is made possible by these community developers:\n- [adavie1](https://github.com/adavie1)\n- [carmencitaqiu](https://github.com/carmencitaqiu)\n- [coderdiaz](https://github.com/coderdiaz)\n- [fedegar33](https://github.com/fedegar33)\n- [Gonzalo2310](https://github.com/Gonzalo2310)\n- [lesterbx](https://github.com/lesterbx)\n- [ProgramerGuy](https://github.com/ProgramerGuy)\n- [SantiagoGdaR](https://github.com/SantiagoGdaR)\n- [sigfriedCub1990](https://github.com/sigfriedCub1990)\n- [thechosenjuan](https://github.com/thechosenjuan)\n\n## Donation\nIf you find Element useful, you can buy us a cup of coffee\n\n<img width=\"650\" src=\"https://user-images.githubusercontent.com/10095631/42198577-587063dc-7ebb-11e8-892b-91e08f99ce1e.jpg\" alt=\"donation\">\n\n## Backers\n\nSupport us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/element#backer)]\n\n<a href=\"https://opencollective.com/element/backer/0/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/0/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/1/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/1/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/2/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/2/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/3/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/3/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/4/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/4/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/5/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/5/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/6/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/6/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/7/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/7/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/8/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/8/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/9/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/9/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/10/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/10/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/11/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/11/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/12/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/12/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/13/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/13/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/14/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/14/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/15/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/15/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/16/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/16/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/17/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/17/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/18/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/18/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/19/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/19/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/20/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/20/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/21/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/21/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/22/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/22/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/23/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/23/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/24/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/24/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/25/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/25/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/26/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/26/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/27/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/27/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/28/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/28/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/backer/29/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/backer/29/avatar.svg\"></a>\n\n\n## Sponsors\n\nBecome a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/element#sponsor)]\n\n<a href=\"https://opencollective.com/element/sponsor/0/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/0/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/1/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/1/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/2/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/2/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/3/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/3/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/4/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/4/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/5/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/5/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/6/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/6/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/7/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/7/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/8/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/8/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/9/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/9/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/10/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/10/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/11/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/11/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/12/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/12/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/13/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/13/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/14/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/14/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/15/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/15/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/16/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/16/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/17/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/17/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/18/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/18/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/19/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/19/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/20/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/20/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/21/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/21/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/22/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/22/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/23/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/23/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/24/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/24/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/25/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/25/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/26/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/26/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/27/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/27/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/28/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/28/avatar.svg\"></a>\n<a href=\"https://opencollective.com/element/sponsor/29/website\" target=\"_blank\"><img src=\"https://opencollective.com/element/sponsor/29/avatar.svg\"></a>\n\n\n\n## LICENSE\n[MIT](LICENSE)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ElemeFE/element.git"
+  },
+  "scripts": {
+    "bootstrap": "yarn || npm i",
+    "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
+    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+    "build:umd": "node build/bin/build-locale.js",
+    "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
+    "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
+    "deploy": "npm run deploy:build && gh-pages -d examples/element-ui --remote eleme && rimraf examples/element-ui",
+    "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/element-ui/CNAME",
+    "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
+    "dev:play": "npm run build:file && cross-env NODE_ENV=development PLAY_ENV=true webpack-dev-server --config build/webpack.demo.js",
+    "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme",
+    "i18n": "node build/bin/i18n.js",
+    "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
+    "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js && sh build/deploy-faas.sh",
+    "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
+    "test:watch": "npm run build:theme && karma start test/unit/karma.conf.js"
+  },
+  "style": "lib/theme-chalk/index.css",
+  "typings": "types/index.d.ts",
+  "unpkg": "lib/index.js",
+  "version": "2.4.6"
+}

@@ -5,7 +5,6 @@ import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import com.bamboo.apidoc.code.toolkit.RoutUtil;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestMethod;
-import java.util.List;
 
 
 /**
@@ -46,7 +45,7 @@ public class Method {
     /**
      * 方法参数
      */
-    private List<Param> params;
+    private Param[] params;
 
 
     public static Method buildRoutMethod(java.lang.reflect.Method method, Class<?> packagePathClass) {
