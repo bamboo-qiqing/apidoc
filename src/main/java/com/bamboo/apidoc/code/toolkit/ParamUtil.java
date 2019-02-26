@@ -1,7 +1,9 @@
 package com.bamboo.apidoc.code.toolkit;
 
-import com.bamboo.apidoc.ApidocApplication;
+
 import com.bamboo.apidoc.code.model.Param;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.annotation.Annotation;
@@ -14,44 +16,58 @@ import java.lang.reflect.Method;
  */
 public class ParamUtil {
 
-
-    public static Param[] getParams(Method method){
+    /**
+     * 根据方法获取当前方法的所有参数信息
+     *
+     * @param method 方法
+     * @return 返回参数对象数组
+     */
+    public static Param[] getParams(Method method) {
+        //java8新特性，可以获取到参数的名称
+        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+        //获取方法中参数的数量
         int parameterCount = method.getParameterCount();
-        Param[]  params=  new Param[parameterCount];
+        //创建参数对象数组，并初始化数组的长度
+        Param[] params = new Param[parameterCount];
+        //获取参数类型
         Class<?>[] parameterTypes = method.getParameterTypes();
-        for (int i=0;i<parameterCount;i++){
+        //根据方法获取参数名称
+        String[] parameterNames = u.getParameterNames(method);
+        //获取方法中参数所有的注解
+        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        Class<?> returnType = method.getReturnType();
+        for (int i = 0; i < parameterCount; i++) {
             Param param = new Param();
-            params[i]=param;
+            param.setName(parameterNames[i]);
+            param.setType(parameterTypes[i].toString());
+            param.setIsNull(isNull(parameterAnnotations[i]));
+            param.setReturnType(returnType);
+            params[i] = param;
         }
         return params;
     }
 
-
-
-    public static void main(String[] args)  {
-        java.lang.reflect.Method aa=null;
-        java.lang.reflect.Method[] methods = ApidocApplication.class.getMethods();
-        for (java.lang.reflect.Method  method:methods) {
-            if("deleteMenu".equals(method.getName())){
-                aa=method;
-            }
-        }
-        Annotation[][] parameterAnnotations = aa.getParameterAnnotations();
-        for ( Annotation[] parameterAnnotation: parameterAnnotations) {
-            for (Annotation  parameterAnnotatio:parameterAnnotation) {
-                if("interface  org.springframework.web.bind.annotation.RequestParam".equals(parameterAnnotatio.annotationType())){
-                    RequestParam dd= (RequestParam) parameterAnnotatio;
+    /**
+     * 根据参数注解判断参数可否为空
+     *
+     * @param annotations 参数注解
+     * @return 如果可以为空  返回true，否则返回false
+     */
+    public static Boolean isNull(Annotation[] annotations) {
+        Boolean isNull = true;
+        if (annotations != null && annotations.length > 1) {
+            for (Annotation annotation : annotations) {
+                if (annotation instanceof RequestParam) {
+                    isNull = ((RequestParam) annotation).required();
+                    break;
                 }
-                System.out.println();
+                if (annotation instanceof RequestBody) {
+                    isNull = ((RequestParam) annotation).required();
+                    break;
+                }
             }
         }
-        Class<?>[] parameterTypes = aa.getParameterTypes();
-        for (Class<?> parameterType:parameterTypes) {
-            System.out.println(parameterType.getName());
-        }
-        int parameterCount = aa.getParameterCount();
-        System.out.println(parameterCount);
-        Class<?> returnType = aa.getReturnType();
 
+        return isNull;
     }
 }

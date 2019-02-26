@@ -21,5 +21,9 @@ public class Param {
      * 参数是否可以置空
      */
     private Boolean isNull;
+    /**
+     * 返回类型
+     */
+    private Object returnType;
 
 }

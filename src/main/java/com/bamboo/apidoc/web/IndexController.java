@@ -23,7 +23,7 @@ import java.util.Date;
  * @Date: 2019/2/25 15:02
  * @description
  */
-@Controller
+@RestController
 @RequestMapping("bamboo")
 public class IndexController {
     @Value("classpath:/apidoc/apidoc.json")
@@ -86,4 +86,10 @@ public class IndexController {
         return new ReturnMsg(Status.SUCCESS);
     }
 
+
+    @PostMapping("updateProject1")
+    @ResponseBody
+    public ReturnMsg updateJson1(String  project,@RequestParam String ss) throws IOException {
+        return new ReturnMsg(Status.SUCCESS);
+    }
 }

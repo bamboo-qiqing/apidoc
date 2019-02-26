@@ -2,6 +2,7 @@ package com.bamboo.apidoc.code.model;
 
 
 import com.bamboo.apidoc.code.toolkit.MethodUtil;
+import com.bamboo.apidoc.code.toolkit.ParamUtil;
 import com.bamboo.apidoc.code.toolkit.RoutUtil;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,6 +56,7 @@ public class Method {
         routMethod.setClassName(packagePathClass.getName());
         routMethod.setMethodType(MethodUtil.getRequestMethod(method));
         routMethod.setRoutPath(RoutUtil.getRout(method,packagePathClass));
+        routMethod.setParams(ParamUtil.getParams(method));
         return routMethod;
     }
 
