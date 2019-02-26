@@ -2,6 +2,7 @@ package com.bamboo.apidoc.code.toolkit;
 
 import cn.hutool.core.io.file.FileWriter;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 
 /**
@@ -13,6 +14,7 @@ public class FileUtil {
     public static void createJson(Object json, String path) {
         File file = cn.hutool.core.io.FileUtil.touch(path);
         FileWriter fileWriter = FileWriter.create(file);
-        fileWriter.write(json.toString());
+        File write = fileWriter.write(json.toString());
+
     }
 }

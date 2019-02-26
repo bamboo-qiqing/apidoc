@@ -8,6 +8,7 @@ import com.bamboo.apidoc.code.toolkit.ClassUtil;
 import com.bamboo.apidoc.code.toolkit.MethodUtil;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import lombok.Data;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,10 @@ public class Project {
      * 项目描述
      */
     private String description;
+    /**
+     * 开启功能
+     */
+    private String[] startFeatures;
     /**
      * 模块集合
      */

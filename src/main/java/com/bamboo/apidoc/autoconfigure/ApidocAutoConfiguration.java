@@ -3,11 +3,13 @@ package com.bamboo.apidoc.autoconfigure;
 
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
+import com.bamboo.apidoc.web.IndexController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 
@@ -21,6 +23,9 @@ import java.io.IOException;
  */
 @EnableConfigurationProperties(ApidocProperties.class)
 @Configuration
+@ComponentScan(basePackageClasses = {
+        IndexController.class,
+})
 public class ApidocAutoConfiguration {
 
 

@@ -1,6 +1,9 @@
 package com.bamboo.apidoc.code.toolkit;
 
+import cn.hutool.core.date.DateUtil;
 import org.springframework.util.ResourceUtils;
+
+import javax.xml.crypto.Data;
 
 /**
  * @Author: GuoQing
@@ -75,6 +78,8 @@ public interface StringPool {
     String HTML_QUOTE = "&quot;";
     String HTML_LT = "&lt;";
     String HTML_GT = "&gt;";
+
+    String DATE_FORMAT_SIX ="yyyy-MM-dd hh:mm:ss";
 
 
     String[] EMPTY_ARRAY = new String[0];
