@@ -29,13 +29,16 @@ public class ApidocProperties implements InitializingBean {
    * 项目描述
    */
   private  String description;
-
+    /**
+     * json文件路径
+     */
   public static String jsonFilePath;
 
   @Override
   public void afterPropertiesSet() throws Exception {
       try {
         jsonFilePath= ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json";
+        System.out.println(ResourceUtils.getURL("classpath:").getPath());
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }

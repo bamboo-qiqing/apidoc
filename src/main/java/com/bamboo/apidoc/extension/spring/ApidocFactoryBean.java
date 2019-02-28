@@ -14,9 +14,11 @@ import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.code.toolkit.StringPool;
 import com.bamboo.apidoc.code.toolkit.ArrayUtils;
 import com.bamboo.apidoc.extension.toolkit.PackageHelper;
+
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+
 import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +35,8 @@ import org.springframework.util.ResourceUtils;
  */
 @Data
 public class ApidocFactoryBean implements InitializingBean {
-    @Value("classpath:/apidoc/apidoc.json")
+
+    @Value(StringPool.JSON_FILE_CLASS_PATH)
     private Resource areaRes;
 
     private static final Log LOGGER = LogFactory.getLog(ApidocFactoryBean.class);
@@ -51,7 +54,7 @@ public class ApidocFactoryBean implements InitializingBean {
      */
     List<Class<?>> packagePathClass;
 
-    private  Project project;
+    private Project project;
 
     public void buildApidocFactory() {
         if (hasLength(this.packagePath)) {
@@ -78,7 +81,7 @@ public class ApidocFactoryBean implements InitializingBean {
 
                 }
             }
-
+        } else {
 
         }
     }
@@ -90,11 +93,11 @@ public class ApidocFactoryBean implements InitializingBean {
         Project project = new Project();
         project.setStartTime(DateUtil.now());
         List<Module> objects = new ArrayList<>();
-        objects.add(new Module(Module.UNALLOCATED,"当前模块为未曾分配的接口集合",null));
+        objects.add(new Module(Module.UNALLOCATED, "当前模块为未曾分配的接口集合", null));
         project.setModules(objects);
-        boolean exist = FileUtil.exist(ResourceUtils.getURL("classpath:").getPath()+"/apidoc/apidoc.json");
-        if(!exist){
-            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project),ApidocProperties.jsonFilePath);
+        boolean exist = FileUtil.exist(ResourceUtils.getURL("classpath:").getPath() + "/apidoc/apidoc.json");
+        if (!exist) {
+            com.bamboo.apidoc.code.toolkit.FileUtil.createJson(JSONObject.toJSON(project), ApidocProperties.jsonFilePath);
         }
         this.project = JSON.parseObject(areaRes.getInputStream(), StandardCharsets.UTF_8, Project.class);
     }

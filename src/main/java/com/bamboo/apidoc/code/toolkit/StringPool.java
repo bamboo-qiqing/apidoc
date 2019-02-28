@@ -1,9 +1,7 @@
 package com.bamboo.apidoc.code.toolkit;
 
-import cn.hutool.core.date.DateUtil;
-import org.springframework.util.ResourceUtils;
 
-import javax.xml.crypto.Data;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * @Author: GuoQing
@@ -79,7 +77,9 @@ public interface StringPool {
     String HTML_LT = "&lt;";
     String HTML_GT = "&gt;";
 
-    String DATE_FORMAT_SIX ="yyyy-MM-dd hh:mm:ss";
+    String DATE_FORMAT_SIX = "yyyy-MM-dd hh:mm:ss";
+
+    String JSON_FILE_CLASS_PATH = "classpath:/apidoc/apidoc.json";
 
 
     String[] EMPTY_ARRAY = new String[0];

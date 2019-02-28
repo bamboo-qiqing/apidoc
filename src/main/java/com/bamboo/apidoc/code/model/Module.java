@@ -12,7 +12,10 @@ import java.util.List;
 @Data
 public class Module {
 
-
+    /**
+     * 所有接口在未分配指定模块时，默认在未分配模块
+     * 此为未分配模块名称
+     */
     public final static String UNALLOCATED = "未分配";
     /**
      * 模块名
@@ -54,7 +57,8 @@ public class Module {
 
     /**
      * 获取与指定模块名相同的模块的下标
-     * @param modules 模块集合
+     *
+     * @param modules    模块集合
      * @param moduleName 模块名
      * @return 存在返回模块的下标，不存在返回-1
      */
@@ -63,7 +67,7 @@ public class Module {
             return -1;
         }
 
-        for (int i=0;i<modules.size();i++){
+        for (int i = 0; i < modules.size(); i++) {
             if (moduleName.equals(modules.get(i).getName())) {
                 return i;
             }

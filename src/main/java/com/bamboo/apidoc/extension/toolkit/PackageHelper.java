@@ -1,17 +1,26 @@
 package com.bamboo.apidoc.extension.toolkit;
 
 
+import com.bamboo.apidoc.annotation.Apidoc;
 import com.bamboo.apidoc.code.toolkit.ExceptionUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import org.springframework.core.io.Resource;
+
+import com.bamboo.apidoc.code.toolkit.FileUtil;
+import org.springframework.core.io.*;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 
 /**
  * <p>
@@ -25,12 +34,12 @@ import org.springframework.util.ClassUtils;
 public class PackageHelper {
 
     public static Class<?>[] convertPackagePath(String packagePath) {
-
         /**
          * PathMatchingResourcePatternResolver是ResourcePatternResolver的实现，
          * 它能够将指定的资源位置路径解析为一个或多个匹配的资源
          */
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+
         MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
         String pkg = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX
                 + ClassUtils.convertClassNameToResourcePath(packagePath) + "/*.class";
@@ -48,7 +57,7 @@ public class PackageHelper {
                         metadataReader = metadataReaderFactory.getMetadataReader(resource);
                         Set<String> annotationTypes = metadataReader.getAnnotationMetadata().getAnnotationTypes();
                         Boolean filter = AnnotaionFilter.filter(annotationTypes);
-                        if (filter){
+                        if (filter) {
                             set.add(Class.forName(metadataReader.getClassMetadata().getClassName()));
                         }
                     }
@@ -61,6 +70,34 @@ public class PackageHelper {
         } catch (Exception e) {
             throw ExceptionUtils.ape("找不到package-path: %s", e, pkg);
         }
+
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
+        TypeFilter annotationTypeFilter = new AnnotationTypeFilter(Apidoc.class);
+        String path = ResourceUtils.getURL("classpath:").getPath();
+        List<File> files = FileUtil.loopFiles(path);
+        for (File file : files) {
+            if ("class".equals(FileUtil.extName(file))) {
+                String[] classes = FileUtil.getAbsolutePath(file.getParent()).split("classes");
+                if(classes!=null&&classes.length>1){
+                    for (String one : classes){
+                        Class<?>[] classes1 = convertPackagePath(one);
+                        for ( Class classes11: classes1){
+                            System.out.println(classes11.getName());
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
+
 
     }
 
