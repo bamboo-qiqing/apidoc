@@ -1,11 +1,11 @@
 package com.bamboo.apidoc.code.model;
 
-
-import com.bamboo.apidoc.code.toolkit.MethodUtil;
-import com.bamboo.apidoc.code.toolkit.ParamUtil;
-import com.bamboo.apidoc.code.toolkit.RoutUtil;
 import lombok.Data;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import java.util.Set;
 
 
 /**
@@ -34,11 +34,11 @@ public class Method {
     /**
      * 接口地址
      */
-    private String routPath;
+    private Set<String> routPaths;
     /**
      * 方法类型
      */
-    private RequestMethod[] methodType;
+    private Set<RequestMethod> methodTypes;
     /**
      * 方法描述
      */
@@ -48,16 +48,36 @@ public class Method {
      */
     private Param[] params;
 
+    /**
+     * 返回类型
+     */
+    private Object returnType;
 
-    public static Method buildRoutMethod(java.lang.reflect.Method method, Class<?> packagePathClass) {
-        Method routMethod = new Method();
-        routMethod.setName(method.getName());
-        routMethod.setPackageName(packagePathClass.getPackage().getName());
-        routMethod.setClassName(packagePathClass.getName());
-        routMethod.setMethodType(MethodUtil.getRequestMethod(method));
-        routMethod.setRoutPath(RoutUtil.getRout(method,packagePathClass));
-        routMethod.setParams(ParamUtil.getParams(method));
-        return routMethod;
+    /**
+     * 根据 RequestMappingInfo 和 handler 构建Method对象
+     *
+     * @param mappingInfo mappingInfo
+     * @param handler     handler
+     * @return 返回构建好的Method对象
+     */
+    static Method buildMethod(RequestMappingInfo mappingInfo, HandlerMethod handler) {
+        Assert.notNull(mappingInfo, "RequestMappingInfo must not be null");
+        Assert.notNull(handler, "HandlerMethod must not be null");
+        Method method = new Method();
+        method.setMethodTypes(mappingInfo.getMethodsCondition().getMethods());
+        method.setRoutPaths(mappingInfo.getPatternsCondition().getPatterns());
+        method.setName(handler.getMethod().getName());
+        method.setPackageName(handler.getMethod().getDeclaringClass().getPackage().getName());
+        method.setClassName(handler.getMethod().getDeclaringClass().getName());
+        method.setParams(Param.buildParams(handler));
+        return method;
+    }
+
+    boolean isChange(Method newMethod) {
+        if (newMethod != null) {
+            return !newMethod.equals(this);
+        }
+        return false;
     }
 
 

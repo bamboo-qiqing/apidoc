@@ -5,17 +5,14 @@ import com.bamboo.apidoc.code.model.Param;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
 /**
  * @Author: GuoQing
  * @Date: 2019/2/22 14:33
  * @description
  */
 public class ParamUtil {
-
     /**
      * 根据方法获取当前方法的所有参数信息
      *
@@ -35,13 +32,12 @@ public class ParamUtil {
         String[] parameterNames = u.getParameterNames(method);
         //获取方法中参数所有的注解
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-        Class<?> returnType = method.getReturnType();
         for (int i = 0; i < parameterCount; i++) {
             Param param = new Param();
             param.setName(parameterNames[i]);
-            param.setType(parameterTypes[i].toString());
+            String[] names = parameterTypes[i].getName().split(StringPool.DOT_TRA);
+            param.setType(names[names.length - 1]);
             param.setIsNull(isNull(parameterAnnotations[i]));
-            param.setReturnType(returnType);
             params[i] = param;
         }
         return params;

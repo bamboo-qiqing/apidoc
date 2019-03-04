@@ -4,16 +4,21 @@
 <#nested >
 </html>
 </#macro>
+
+
 <#macro head >
 <head>
     <meta charset="UTF-8">
     <title>API文档</title>
     <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.7/css/bootstrap.min.css">
     <script src="/vue/vue.min.js"></script>
     <script src="/element-ui/lib/index.js"></script>
     <script src="/axios/axios.min.js"></script>
 </head>
 </#macro>
+
+
 <#macro  body main >
  <style>
      .el-header, .el-footer {
@@ -45,7 +50,6 @@
         </el-menu>
     </el-header>
     <el-container>
-
        <#if  main ==true >
            <#nested >
        <#else>

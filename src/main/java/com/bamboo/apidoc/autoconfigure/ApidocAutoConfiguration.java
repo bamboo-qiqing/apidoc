@@ -4,7 +4,7 @@ package com.bamboo.apidoc.autoconfigure;
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
 import com.bamboo.apidoc.web.IndexController;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,8 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
-
-import java.io.IOException;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 
 /**
@@ -56,8 +55,8 @@ public class ApidocAutoConfiguration {
     }
 
     @Bean(name = "projectInfo")
-    @ConditionalOnBean(ApidocFactoryBean.class)
-    public Project getProjectInfo(@Autowired ApidocFactoryBean apidocFactory) throws IOException {
+    @ConditionalOnBean({ApidocFactoryBean.class, RequestMappingHandlerMapping.class})
+    public Project getProjectInfo() {
         Project projectInfo = new Project();
         if (!ObjectUtils.isEmpty(this.properties.getTitle())) {
             projectInfo.setName(this.properties.getTitle());
@@ -65,7 +64,7 @@ public class ApidocAutoConfiguration {
         if (!ObjectUtils.isEmpty(this.properties.getDescription())) {
             projectInfo.setDescription(this.properties.getDescription());
         }
-        projectInfo.buildProjectInfoFactory(apidocFactory);
+//        projectInfo.buildProjectInfoFactory(apidocFactory);
         return projectInfo;
     }
 }

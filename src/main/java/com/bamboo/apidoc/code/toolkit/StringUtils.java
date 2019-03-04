@@ -1,12 +1,13 @@
 package com.bamboo.apidoc.code.toolkit;
 
-
+import cn.hutool.core.util.StrUtil;
+import java.util.Set;
 /**
  * @Author: GuoQing
  * @Date: 2019/2/12 21:55
  * @description String 工具类
  */
-public class StringUtils {
+public class StringUtils extends StrUtil {
     /**
      * 安全的进行字符串 format
      *
@@ -23,20 +24,41 @@ public class StringUtils {
 
     /**
      * 为字符串指定特定的字符开头
+     *
      * @param prefix 字符串
-     * @param starts  指定开头
      * @return 处理过的String
      */
-    public static String startsWith(String prefix, String starts) {
+    static String startsWith(String prefix) {
         String pre = "";
-        if (prefix == null || prefix == "") {
+        if (prefix == null) {
             return pre;
         }
-        if (!prefix.startsWith(starts)) {
-            pre = starts + prefix;
-        }else{
-            pre =prefix;
+        if (!prefix.startsWith(StringPool.SLASH)) {
+            pre = StringPool.SLASH + prefix;
+        } else {
+            pre = prefix;
         }
-        return  pre;
+        return pre;
     }
+
+
+    /**
+     * url使用,拼接
+     *
+     * @param unless url集合
+     * @return 返回拼接的url
+     */
+    public static String urlSplice(Set<String> unless) {
+        StringBuilder url = new StringBuilder();
+        if (unless != null && unless.size() > 0) {
+            for (String urls : unless) {
+                url.append(urls);
+                url.append(",");
+            }
+        }
+        return url.toString();
+    }
+
+
+
 }

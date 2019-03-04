@@ -48,24 +48,24 @@ public class RoutUtil {
             if ("".equals(annotation.value()) || annotation.value().equals(StringPool.SLASH)) {
                 if (clazz.getAnnotation(RequestMapping.class) != null) {
                     RequestMapping annotation1 = clazz.getAnnotation(RequestMapping.class);
-                    return StringUtils.startsWith(annotation1.value()[0], StringPool.SLASH);
+                    return StringUtils.startsWith(annotation1.value()[0]);
                 }
             }
-            return StringUtils.startsWith(annotation.value(), StringPool.SLASH);
+            return StringUtils.startsWith(annotation.value());
         }
         if (clazz.getAnnotation(Controller.class) != null) {
             Controller annotation = clazz.getAnnotation(Controller.class);
             if ("".equals(annotation.value()) || annotation.value().equals(StringPool.SLASH)) {
                 if (clazz.getAnnotation(RequestMapping.class) != null) {
                     RequestMapping annotation1 = clazz.getAnnotation(RequestMapping.class);
-                    return StringUtils.startsWith(annotation1.value()[0], StringPool.SLASH);
+                    return StringUtils.startsWith(annotation1.value()[0]);
                 }
             }
-            return StringUtils.startsWith(annotation.value(), StringPool.SLASH);
+            return StringUtils.startsWith(annotation.value());
         }
         if (clazz.getAnnotation(Apidoc.class) != null) {
             Apidoc annotation = clazz.getAnnotation(Apidoc.class);
-            return StringUtils.startsWith(annotation.value(), StringPool.SLASH);
+            return StringUtils.startsWith(annotation.value());
         }
 
         return "";
@@ -82,15 +82,15 @@ public class RoutUtil {
         //TODO 有bug
         if (method.getAnnotation(GetMapping.class) != null) {
             GetMapping annotation = method.getAnnotation(GetMapping.class);
-            return StringUtils.startsWith(annotation.value()[0], StringPool.SLASH);
+            return StringUtils.startsWith(annotation.value()[0]);
         }
         if (method.getAnnotation(PostMapping.class) != null) {
             PostMapping annotation = method.getAnnotation(PostMapping.class);
-            return StringUtils.startsWith(annotation.value()[0], StringPool.SLASH);
+            return StringUtils.startsWith(annotation.value()[0]);
         }
         if (method.getAnnotation(RequestMapping.class) != null) {
             RequestMapping annotation = method.getAnnotation(RequestMapping.class);
-            return StringUtils.startsWith(annotation.value()[0], StringPool.SLASH);
+            return StringUtils.startsWith(annotation.value()[0]);
         }
 
         return "";

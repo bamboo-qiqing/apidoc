@@ -21,6 +21,7 @@ public interface StringPool {
     String DASH = "-";
     String DOLLAR = "$";
     String DOT = ".";
+    String DOT_TRA = "\\.";
     String DOTDOT = "..";
     String DOT_CLASS = ".class";
     String DOT_JAVA = ".java";

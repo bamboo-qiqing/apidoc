@@ -4,32 +4,20 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bamboo.apidoc.annotation.Apidoc;
 import com.bamboo.apidoc.autoconfigure.ApidocProperties;
 import com.bamboo.apidoc.code.enums.Status;
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.code.model.ReturnMsg;
-import com.bamboo.apidoc.code.toolkit.FileUtil;
 import com.bamboo.apidoc.code.toolkit.StringPool;
-
-import com.bamboo.apidoc.extension.toolkit.PackageHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
-import org.springframework.core.type.classreading.MetadataReaderFactory;
-import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  * @Author: GuoQing
@@ -39,46 +27,45 @@ import java.util.List;
 @Controller
 @RequestMapping("bamboo")
 public class IndexController {
-    @Value("classpath:/apidoc/apidoc.json")
+    @Value(StringPool.JSON_FILE_CLASS_PATH)
     private Resource areaRes;
 
     /**
      * 跳转index界面
      *
-     * @return
+     * @return 返回
      */
     @GetMapping("index")
-    public String toIndex() throws IOException {
-        return "index";
+    public String toIndex() {
+        return "bamboo/apidoc/index";
     }
 
     /**
      * 跳转项目信息页面
      *
-     * @return
+     * @return 跳转项目信息界面
      */
     @GetMapping("project")
     public String toProject() {
-        return "project";
+        return "bamboo/apidoc/project";
     }
 
-
     /**
-     * 跳转项目信息页面
+     * 跳转文档界面
      *
-     * @return
+     * @return 跳转文档界面
      */
     @GetMapping("apidoc")
     public String toApidoc() {
-        return "apidoc";
+        return "bamboo/apidoc/apidoc";
     }
 
 
     /**
      * 获取JSON数据
      *
-     * @return
-     * @throws IOException
+     * @return 返回JSON文件读取到的信息
+     * @throws IOException 文件读取异常
      */
     @GetMapping("getJson")
     @ResponseBody
@@ -99,35 +86,9 @@ public class IndexController {
         return new ReturnMsg(Status.SUCCESS);
     }
 
-
-    @GetMapping("updateProject1")
+    @GetMapping("updateProject")
     @ResponseBody
-    public ReturnMsg updateJson1() throws IOException {
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
-        TypeFilter annotationTypeFilter = new AnnotationTypeFilter(Apidoc.class);
-        String path = ResourceUtils.getURL("classpath:").getPath();
-        System.out.println(path);
-        List<File> files = FileUtil.loopFiles(path);
-        for (File file : files) {
-
-            if ("class".equals(FileUtil.extName(file))) {
-                System.out.println("上级目录"+FileUtil.getAbsolutePath(file.getParent()));
-                String[] classes = FileUtil.getAbsolutePath(file.getParent()).split("classes");
-                if(classes!=null&&classes.length>1){
-                    for (String one : classes){
-                        Class<?>[] classes1 = PackageHelper.convertPackagePath(one);
-                        for ( Class classes11: classes1){
-                            System.out.println(classes11.getName());
-                        }
-                    }
-                }
-            }
-
-
-
-        }
-
+    public ReturnMsg updateJson(@RequestParam(required = false) int test) {
         return new ReturnMsg(Status.SUCCESS);
     }
 }
