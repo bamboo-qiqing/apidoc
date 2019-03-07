@@ -17,9 +17,8 @@
                 <el-aside style="overflow:none!important;">
                     <el-menu style="border:none !important;overflow-y:none"
                              default-active="2"
-                             class="el-menu-vertical-demo"
-                             @open="handleOpen">
-                        <el-menu-item :index="index" v-for="(model, index) in models"  @click="currentModelInfo(model)">
+                             class="el-menu-vertical-demo">
+                        <el-menu-item :index="index" v-for="(model, index) in models" @click="currentModelInfo(model)">
                             <i class="el-icon-menu"></i>
                             <span slot="title">{{model.name}}</span>
                         </el-menu-item>
@@ -35,18 +34,14 @@
                             <el-col :span="8">
                                 <el-form-item label="模块名称:">
                                     <el-input v-if="edit.flag"
-                                              placeholder="请输入接口名称"
                                               v-model="currentModel.name">
                                     </el-input>
                                     <el-input v-else readonly="true" class="read-only"
-                                              placeholder="请输入接口名称"
                                               v-model="currentModel.name">
                                     </el-input>
                                 </el-form-item>
-                                <el-form-item label="接口数量:">
-
+                                <el-form-item v-if="!edit.flag" label="接口数量:">
                                     <el-input readonly="true" class="read-only"
-                                              placeholder="请输入接口名称"
                                               v-model="currentModel.methods.length">
                                     </el-input>
                                 </el-form-item>
@@ -61,6 +56,9 @@
                                               rows="2"
                                               v-model="currentModel.description">
                                     </el-input>
+                                </el-form-item>
+                                <el-form-item v-if="edit.flag">
+                                    <el-button type="primary" @click="saveModel">保存</el-button>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -85,9 +83,13 @@
             }
         },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            }, modeSwitching() {
+            addModel() {
+                let _this = this;
+                _this.currentModel = {name: "", description: "", methods: []};
+                _this.edit.flag = true;
+                _this.edit.text = "查看";
+            },
+            modeSwitching() {
                 let _this = this;
                 if (_this.edit.flag) {
                     _this.edit.flag = false;
@@ -99,20 +101,44 @@
             }, currentModelInfo(model) {
                 let _this = this;
                 _this.currentModel = model;
-              console.log(_this.currentModel)
+                console.log(_this.currentModel)
             }, getJson() {
                 let _this = this;
-                axios({
-                    method: 'get',
+                $.ajax({
+                    type: 'get',
                     url: '/bamboo/getJson',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    responseType: 'json',
-                    transformResponse: [function (data) {
+                    dataType: "json",
+                    data: {},
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    success: function (data) {
                         _this.models = data.result.modules;
-                        console.log(_this.modules)
-                        return data;
-                    }]
-                })
+                    },
+                    error: function (data) {
+                    }
+                });
+            }, saveModel() {
+                let _this = this;
+                $.ajax({
+                    type: "post",
+                    url: '/bamboo/saveModel',
+                    dataType: "json",
+                    data: {name: _this.currentModel.name, description: _this.currentModel.description},
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    success: function (data) {
+                        _this.$message({
+                            message: '成功',
+                            type: 'success'
+                        });
+                        this.getJson();
+                    },
+                    error: function (data) {
+                        _this.$message({
+                            message: '保存失败',
+                            type: 'warning'
+                        });
+                        this.getJson();
+                    }
+                });
             }
         }, mounted:
                 function () {

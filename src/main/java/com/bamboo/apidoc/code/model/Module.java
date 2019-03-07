@@ -45,7 +45,7 @@ public class Module {
      * @param moduleName 模块名
      * @return 存在返回模块的下标，不存在返回-1
      */
-    static int getOneModuleByName(List<Module> modules, String moduleName) {
+   public static int getOneModuleByName(List<Module> modules, String moduleName) {
         if (modules == null || modules.size() < 1 || moduleName == null || "".equals(moduleName)) {
             return -1;
         }

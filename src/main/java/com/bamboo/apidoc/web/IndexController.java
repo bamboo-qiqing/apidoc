@@ -1,16 +1,13 @@
 package com.bamboo.apidoc.web;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
+
 import com.bamboo.apidoc.code.enums.Status;
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.code.model.ReturnMsg;
-import com.bamboo.apidoc.code.toolkit.StringPool;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
+import com.bamboo.apidoc.service.ApiDocService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.Date;
 
 /**
  * @Author: GuoQing
@@ -20,8 +17,8 @@ import java.util.Date;
 @Controller
 @RequestMapping("bamboo")
 public class IndexController {
-    @Value(StringPool.JSON_FILE_CLASS_PATH)
-    private Resource areaRes;
+    @Autowired
+    private ApiDocService apiDocService;
 
     /**
      * 跳转index界面
@@ -52,6 +49,7 @@ public class IndexController {
     public String toApidoc() {
         return "bamboo/apidoc/apidoc";
     }
+
     /**
      * 跳转文档界面
      *
@@ -82,13 +80,20 @@ public class IndexController {
     @PostMapping("updateProject")
     @ResponseBody
     public ReturnMsg updateJson(@RequestBody Project project) {
-        Project projec = Project.getProject();
-        projec.setStartTime(StrUtil.isBlank(project.getStartTime()) ? DateUtil.format(new Date(), StringPool.DATE_FORMAT_SIX) : project.getStartTime());
-        projec.setDescription(project.getDescription());
-        projec.setName(project.getName());
-        projec.submitJson();
-        return new ReturnMsg(Status.SUCCESS);
+        return apiDocService.updateProject(project);
     }
+
+    /**
+     * 保存moldel
+     *
+     * @return 接口结果
+     */
+    @PostMapping("saveModel")
+    @ResponseBody
+    public ReturnMsg saveModel(@RequestParam(required = false) String name, @RequestParam String description) {
+        return apiDocService.saveModel(name, description);
+    }
+
 
     @GetMapping("updateProject")
     @ResponseBody
@@ -101,11 +106,12 @@ public class IndexController {
     public ReturnMsg getToString(@RequestBody Object o) {
         return new ReturnMsg(Status.SUCCESS);
     }
+
     @GetMapping("getToString/{test}")
     @ResponseBody
     public ReturnMsg getToString(@PathVariable String test) {
         return new ReturnMsg(Status.SUCCESS);
     }
 
-  
+
 }

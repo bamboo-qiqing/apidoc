@@ -43,7 +43,7 @@
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                     <button type="button" class="btn btn-default" v-model="edit" @click="modeSwitching" >{{edit.text}}</button>
-                    <button type="submit" class="btn btn-default">保存</button>
+                    <button type="button" v-if="window.location.href.split('/')[window.location.href.split('/').length-1]=='model'" class="btn btn-default" @click="addModel" >新增</button>
                 </form>
             </div>
         </div>
