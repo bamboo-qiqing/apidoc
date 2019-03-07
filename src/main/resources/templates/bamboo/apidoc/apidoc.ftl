@@ -5,7 +5,6 @@
     .read-only input {
         border: 0px;
     }
-
     .el-menu-item, .el-submenu__title {
         height: 100%;
     }
@@ -15,21 +14,36 @@
         <el-col :span="2">
             <div class="grid-content bg-purple">
                 <el-aside style="overflow:none!important;">
-                    <el-menu style="border:none !important;overflow-y:none"
+                    <el-menu style="border:none !important;overflow-y:none" v-if="project!=null"
                              default-active="2"
-                             class="el-menu-vertical-demo"
-                             @open="handleOpen"
-                             @close="handleClose">
-                        <el-submenu v-for="(apidoc, index) in apidocs" :index="index">
+                             class="el-menu-vertical-demo">
+                        <el-submenu v-for="(apidoc, index) in project.modules" :index="index">
                             <template slot="title">
                                 <span>{{apidoc.name}}</span>
                             </template>
                             <el-menu-item-group v-for="(method, index) in apidoc.methods">
                                 <el-menu-item :index="method.methodInfo.methodBasic.routPaths"
                                               @click="currentApiInfo(method,apidoc.name)">
-                                    <template v-for="url in method.methodInfo.methodBasic.routPaths">
-                                        {{url}}
-                                    </template>
+                                    <el-row>
+                                        <el-col v-if="method.methodInfo.methodBasic.chineseName==null" :span="20">
+                                            <template v-for="url in method.methodInfo.methodBasic.routPaths">
+                                                {{url}}
+                                            </template>
+                                        </el-col>
+                                        <el-col v-else :span="20">
+                                            {{method.methodInfo.methodBasic.chineseName}}
+                                        </el-col>
+                                        <el-col :span="2"
+                                                v-if="checkVersion!=method.checkVersion && method.methodMark.change">
+                                            <el-badge value="改动/不存在" class="item" type="warning"></el-badge>
+                                        </el-col>
+                                        <el-col :span="2" v-else-if="method.methodMark.change">
+                                            <el-badge value="改动" class="item" type="warning"></el-badge>
+                                        </el-col>
+                                        <el-col :span="2" v-else-if="checkVersion!=method.checkVersion">
+                                            <el-badge value="不存在" class="item" type="warning"></el-badge>
+                                        </el-col>
+                                    </el-row>
                                 </el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
@@ -69,7 +83,7 @@
                         <el-form-item label="所在模块:">
                             <el-select v-if="edit.flag" v-model="currentModel" placeholder="请选择">
                                 <el-option
-                                        v-for="item in apidocs"
+                                        v-for="item in project.modules"
                                         :key="item.name"
                                         :label="item.name"
                                         :value="item.name">
@@ -128,9 +142,10 @@
         el: "#app",
         data() {
             return {
-                apidocs: [],
+                project: null,
                 currentApi: null,
                 currentModel: '',
+                checkVersion: '',
                 edit: {
                     flag: false,
                     text: "编辑"
@@ -139,9 +154,7 @@
             }
         },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            }, modeSwitching() {
+            modeSwitching() {
                 let _this = this;
                 if (_this.edit.flag) {
                     _this.edit.flag = false;
@@ -150,9 +163,6 @@
                     _this.edit.flag = true;
                     _this.edit.text = '查看';
                 }
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
             }, currentApiInfo(apiInfo, modelName) {
                 let _this = this;
                 _this.currentApi = apiInfo;
@@ -166,8 +176,9 @@
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     responseType: 'json',
                     transformResponse: [function (data) {
-                        _this.apidocs = data.result.modules;
-                        console.log(data);
+                        _this.project = data.result;
+                        console.log(_this.project)
+                        _this.checkVersion = data.result.largeVersion + '.' + data.result.smallVersion;
                         return data;
                     }]
                 })

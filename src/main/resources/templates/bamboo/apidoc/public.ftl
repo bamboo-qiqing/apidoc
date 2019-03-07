@@ -35,6 +35,7 @@
                     <li><a href="/bamboo/apidoc">API文档</a></li>
                     <li><a href="/bamboo/project">统计图</a></li>
                     <li><a href="/bamboo/model">模块管理</a></li>
+                    <li><a href="/bamboo/user">成员管理</a></li>
                     <li><a href="/bamboo/project">项目信息</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">

@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
-import java.util.HashMap;
-
 
 /**
  * @Author: GuoQing
@@ -110,9 +107,5 @@ public class IndexController {
         return new ReturnMsg(Status.SUCCESS);
     }
 
-    @GetMapping("getToString11")
-    @ResponseBody
-    public ReturnMsg getToString11(@RequestHeader String tes1111t) {
-        return new ReturnMsg(Status.SUCCESS);
-    }
+  
 }

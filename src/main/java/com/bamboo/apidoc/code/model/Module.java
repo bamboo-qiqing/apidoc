@@ -71,7 +71,8 @@ public class Module {
                 if (methodInfos != null && methodInfos.size() > 0) {
                     for (int j = 0; j < methodInfos.size(); j++) {
                         MethodCache methodCache = MethodCache.buildMethod(modules.get(i).getName(), i, j, methodInfos.get(j));
-                        methodCacheMap.put(StringUtils.patternsSplice(methodInfos.get(j).getMethodInfo().getMethodBasic().getRoutPaths()), methodCache);
+                        MethodBasic methodBasic = methodInfos.get(j).getMethodInfo().getMethodBasic();
+                        methodCacheMap.put(StringUtils.patternsSplice(methodBasic), methodCache);
                     }
                 }
             }

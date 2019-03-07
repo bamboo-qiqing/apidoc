@@ -61,7 +61,7 @@ public class MethodBasic {
      * @param handler     handler
      * @return 返回构建好的Method对象
      */
-    static MethodBasic buildMethodBasic(RequestMappingInfo mappingInfo, HandlerMethod handler) {
+  public  static MethodBasic buildMethodBasic(RequestMappingInfo mappingInfo, HandlerMethod handler) {
         Assert.notNull(mappingInfo, "RequestMappingInfo must not be null");
         Assert.notNull(handler, "HandlerMethod must not be null");
         MethodBasic methodInfo = new MethodBasic();
@@ -95,7 +95,7 @@ public class MethodBasic {
      */
     MethodMark getMethodMark(Boolean ischange) {
         MethodMark methodMark = new MethodMark();
-        methodMark.setChange(ischange == null ? Boolean.FALSE : Boolean.TRUE);
+        methodMark.setChange(ischange == null ? Boolean.FALSE : ischange);
         methodMark.setMethodBasic(this);
         return methodMark;
     }

@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bamboo.apidoc.code.exceptions.ApiDocException;
 import com.bamboo.apidoc.code.toolkit.StringUtils;
 import lombok.Data;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -183,11 +184,9 @@ public class Project {
         Map<String, MethodCache> allMethods = this.getAllMethods();
         //遍历所有Spring处理器获取到的方法
         for (Map.Entry<RequestMappingInfo, HandlerMethod> handlerMethod : handlerMethods.entrySet()) {
-            //获取方法中的Url
-            Set<String> patterns = handlerMethod.getKey().getPatternsCondition().getPatterns();
             //根据拼接的Url检测已存在方法中是否存在该接口
             if (allMethods != null) {
-                MethodCache methodCache = allMethods.get(StringUtils.patternsSplice(patterns));
+                MethodCache methodCache = allMethods.get(StringUtils.patternsSplice(handlerMethod));
                 Method newmethod = Method.buildMethod(handlerMethod.getKey(), handlerMethod.getValue());
                 //不存在则生成，存入未分配模块
                 if (methodCache == null) {
@@ -204,11 +203,11 @@ public class Project {
                     }
                 } else {
                     Method metho = methodCache.getMethodInfo();
+                    Method method = this.getModules().get(methodCache.getModuleSubscript()).getMethods().get(methodCache.getMethodSubscript());
+                    method.setCheckVersion(this.largeVersion + "." + this.smallVersion);
                     if (newmethod != null) {
                         if (newmethod.isChange(metho)) {
                             MethodMark methodMark = newmethod.getMethodInfo().getMethodBasic().getMethodMark(Boolean.TRUE);
-                            Method method = this.getModules().get(methodCache.getModuleSubscript()).getMethods().get(methodCache.getMethodSubscript());
-                            method.setCheckVersion(this.largeVersion + "." + this.smallVersion);
                             method.setMethodMark(methodMark);
                         }
                     }
