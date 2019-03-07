@@ -1,6 +1,11 @@
 package com.bamboo.apidoc.code.toolkit;
 
 import cn.hutool.core.util.StrUtil;
+import com.bamboo.apidoc.autoconfigure.ApidocAutoConfiguration;
+import com.bamboo.apidoc.code.exceptions.ApiDocException;
+import org.springframework.util.ResourceUtils;
+
+import java.io.FileNotFoundException;
 import java.util.Set;
 /**
  * @Author: GuoQing
@@ -8,19 +13,6 @@ import java.util.Set;
  * @description String 工具类
  */
 public class StringUtils extends StrUtil {
-    /**
-     * 安全的进行字符串 format
-     *
-     * @param target 目标字符串
-     * @param params format 参数
-     * @return format 后的
-     */
-    public static String format(String target, Object... params) {
-        if (target.contains("%s") && ArrayUtils.isNotEmpty(params)) {
-            return String.format(target, params);
-        }
-        return target;
-    }
 
     /**
      * 为字符串指定特定的字符开头
@@ -48,7 +40,7 @@ public class StringUtils extends StrUtil {
      * @param unless url集合
      * @return 返回拼接的url
      */
-    public static String urlSplice(Set<String> unless) {
+    public static String patternsSplice(Set<String> unless) {
         StringBuilder url = new StringBuilder();
         if (unless != null && unless.size() > 0) {
             for (String urls : unless) {
@@ -59,6 +51,17 @@ public class StringUtils extends StrUtil {
         return url.toString();
     }
 
-
-
+    /**
+     * 获取JSON文件地址
+     * @return JSON文件地址
+     */
+    public  static  String  getJsonPath(){
+        String jsonpath = "";
+        try {
+            jsonpath = ResourceUtils.getURL("classpath:").getPath() + StringPool.JSON_PATH;
+        } catch (FileNotFoundException e) {
+            throw new ApiDocException("获取Json文件地址失败 错误信息为" + e);
+        }
+        return   jsonpath;
+    }
 }

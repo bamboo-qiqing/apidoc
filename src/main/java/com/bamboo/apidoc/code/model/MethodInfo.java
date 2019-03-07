@@ -1,38 +1,25 @@
 package com.bamboo.apidoc.code.model;
 
 import lombok.Data;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+
 
 /**
  * @Author: GuoQing
- * @Date: 2019/3/1 17:28
- * @description 方法详细信息
+ * @Date: 2019/3/6 15:14
+ * @description
  */
 @Data
 public class MethodInfo {
     /**
-     * 方法标记
+     * 版本默认初始值
      */
-    private MethodMark methodMark;
+    public final static Integer defaultVersion = 1;
     /**
-     * 当前接口信息
+     * 当前方法版本
      */
-    private Method method;
-
+    private Integer version;
     /**
-     * 当前方法版本号
+     * 方法基本信息
      */
-    private  String methodVersion;
-    /**
-     * 已经改动版本
-     */
-    private Method[] changeMethods;
-
-    static MethodInfo buildMethodInfo(RequestMappingInfo mappingInfo, HandlerMethod handler) {
-        MethodInfo methodInfo = new MethodInfo();
-        methodInfo.setMethodMark(MethodMark.buildMethodMark(Boolean.FALSE));
-        methodInfo.setMethod(Method.buildMethod(mappingInfo,handler));
-        return methodInfo;
-    }
+    private MethodBasic methodBasic;
 }

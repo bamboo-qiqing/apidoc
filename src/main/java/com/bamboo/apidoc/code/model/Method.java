@@ -1,84 +1,69 @@
 package com.bamboo.apidoc.code.model;
 
 import lombok.Data;
-import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import java.util.Set;
-
 
 /**
  * @Author: GuoQing
- * @Date: 2019/2/13 16:43
- * @description 路由方法详情
+ * @Date: 2019/3/1 17:28
+ * @description 方法详细信息
  */
 @Data
 public class Method {
     /**
-     * 方法名
+     * 默认总版本初始值
      */
-    private String name;
+    public static final Integer defaultTotalVersion = 1;
     /**
-     * 包名
+     * 方法标记
      */
-    private String packageName;
+    private MethodMark methodMark;
     /**
-     * 类名称
+     * 当前接口信息
      */
-    private String className;
+    private MethodInfo methodInfo;
     /**
-     * 中文名
+     * 当前检测版本号
      */
-    private String chineseName;
+    private String checkVersion;
     /**
-     * 接口地址
+     * 此方法总版本记录
      */
-    private Set<String> routPaths;
+    private Integer totalVersion;
     /**
-     * 方法类型
+     * 已经改动版本
      */
-    private Set<RequestMethod> methodTypes;
-    /**
-     * 方法描述
-     */
-    private String description;
-    /**
-     * 方法参数
-     */
-    private Param[] params;
+    private MethodInfo[] methodHistories;
 
     /**
-     * 返回类型
-     */
-    private Object returnType;
-
-    /**
-     * 根据 RequestMappingInfo 和 handler 构建Method对象
+     * 初始化方法实体
      *
-     * @param mappingInfo mappingInfo
-     * @param handler     handler
-     * @return 返回构建好的Method对象
+     * @param mappingInfo RequestMappingInfo
+     * @param handler     HandlerMethod
+     * @return method对象
      */
     static Method buildMethod(RequestMappingInfo mappingInfo, HandlerMethod handler) {
-        Assert.notNull(mappingInfo, "RequestMappingInfo must not be null");
-        Assert.notNull(handler, "HandlerMethod must not be null");
         Method method = new Method();
-        method.setMethodTypes(mappingInfo.getMethodsCondition().getMethods());
-        method.setRoutPaths(mappingInfo.getPatternsCondition().getPatterns());
-        method.setName(handler.getMethod().getName());
-        method.setPackageName(handler.getMethod().getDeclaringClass().getPackage().getName());
-        method.setClassName(handler.getMethod().getDeclaringClass().getName());
-        method.setParams(Param.buildParams(handler));
+        method.setMethodMark(new MethodBasic().getMethodMark(Boolean.FALSE));
+        MethodBasic methodBasic = MethodBasic.buildMethodBasic(mappingInfo, handler);
+        method.setMethodInfo(methodBasic.getMethodInfo(MethodInfo.defaultVersion));
+        method.setTotalVersion(defaultTotalVersion);
         return method;
     }
 
-    boolean isChange(Method newMethod) {
-        if (newMethod != null) {
-            return !newMethod.equals(this);
+
+    boolean isChange(MethodBasic newMethodInfo) {
+        if (newMethodInfo != null) {
+            return !newMethodInfo.equals(this.getMethodInfo().getMethodBasic());
         }
         return false;
     }
 
-
+    boolean isChange(Method method) {
+        if (method != null && method.getMethodInfo() != null) {
+            return isChange(method.getMethodInfo().getMethodBasic());
+        }
+        return false;
+    }
 }

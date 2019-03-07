@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @Author: GuoQing
  * @Date: 2019/3/1 17:21
- * @description method 改动标记类
+ * @description   method 改动标记类
  */
 @Data
 public class MethodMark {
@@ -15,17 +15,10 @@ public class MethodMark {
      */
     private boolean isChange;
     /**
-     * 当前总版本号
-     */
-    private String totalVersion;
-    /**
      * 改动后的接口
      */
-    private Method method;
+    private MethodBasic methodBasic;
 
-    static MethodMark buildMethodMark(Boolean ischange) {
-        MethodMark methodMark = new MethodMark();
-        methodMark.setChange(ischange == null ? Boolean.FALSE : Boolean.TRUE);
-        return methodMark;
-    }
+
+
 }

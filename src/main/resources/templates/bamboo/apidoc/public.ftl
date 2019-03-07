@@ -4,21 +4,18 @@
 <#nested >
 </html>
 </#macro>
-
-
 <#macro head >
 <head>
     <meta charset="UTF-8">
     <title>API文档</title>
     <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css">
+    <script src="/jquery/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="/bootstrap/bootstrap-3.3.7/css/bootstrap.min.css">
     <script src="/vue/vue.min.js"></script>
     <script src="/element-ui/lib/index.js"></script>
     <script src="/axios/axios.min.js"></script>
 </head>
 </#macro>
-
-
 <#macro  body main >
  <style>
      .el-header, .el-footer {
@@ -28,37 +25,37 @@
  </style>
 <body style="width: 100%;height: 100%">
 <div id="app" style="width: 100%;height: 100%">
-    <el-header style="text-align: center">
-        <h2>API文档管理</h2>
-    </el-header>
-    <el-header style="text-align: center">
-        <el-menu class="el-menu-demo" mode="horizontal">
-            <el-menu-item index="1"><a href="/bamboo/apidoc">API文档</a></el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">统计图</template>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-                <el-menu-item index="2-3">选项3</el-menu-item>
-                <el-submenu index="2-4">
-                    <template slot="title">选项4</template>
-                    <el-menu-item index="2-4-1">选项1</el-menu-item>
-                    <el-menu-item index="2-4-2">选项2</el-menu-item>
-                    <el-menu-item index="2-4-3">选项3</el-menu-item>
-                </el-submenu>
-            </el-submenu>
-            <el-menu-item index="4"><a href="/bamboo/project">项目信息</a></el-menu-item>
-        </el-menu>
-    </el-header>
+    <nav class="navbar navbar-default" style="margin-bottom:0px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Bamboo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/bamboo/apidoc">API文档</a></li>
+                    <li><a href="/bamboo/project">统计图</a></li>
+                    <li><a href="/bamboo/model">模块管理</a></li>
+                    <li><a href="/bamboo/project">项目信息</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="button" class="btn btn-default" v-model="edit" @click="modeSwitching" >{{edit.text}}</button>
+                    <button type="submit" class="btn btn-default">保存</button>
+                </form>
+            </div>
+        </div>
+    </nav>
     <el-container>
        <#if  main ==true >
            <#nested >
        <#else>
-        <el-main>
+        <el-main style="overflow:none!important;">
             <#nested >
         </el-main>
        </#if>
     </el-container>
-
 </div>
 </body>
 </#macro>

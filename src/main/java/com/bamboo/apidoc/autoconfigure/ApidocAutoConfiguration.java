@@ -1,70 +1,32 @@
 package com.bamboo.apidoc.autoconfigure;
 
-
+import com.bamboo.apidoc.code.exceptions.ApiDocException;
 import com.bamboo.apidoc.code.model.Project;
-import com.bamboo.apidoc.extension.spring.ApidocFactoryBean;
+import com.bamboo.apidoc.code.toolkit.StringPool;
 import com.bamboo.apidoc.web.IndexController;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ObjectUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.io.FileNotFoundException;
 
 /**
  * @Author: GuoQing
- * @Date: 2019/2/2 11:07
+ * @Date: 2019/3/4 22:45
  * @description
  */
-@EnableConfigurationProperties(ApidocProperties.class)
 @Configuration
-@ComponentScan(basePackageClasses = {
-        IndexController.class,
-})
+@ComponentScan(basePackageClasses = {IndexController.class,})
 public class ApidocAutoConfiguration {
 
+    @Bean(name = "project")
+    @ConditionalOnBean({RequestMappingHandlerMapping.class})
+    public Project project(@Autowired RequestMappingHandlerMapping requestMappingHandlerMapping) {
 
-    private Project project;
-    /**
-     * apidoc 配置文件
-     */
-    private ApidocProperties properties;
-
-    ApidocAutoConfiguration(ApidocProperties properties) {
-        this.properties = properties;
-    }
-
-    /**
-     * apidoc工厂bean配置
-     */
-    @Bean(name = "apidocFactory")
-    @ConditionalOnMissingBean
-    public ApidocFactoryBean apiDocFactory() {
-        ApidocFactoryBean factory = new ApidocFactoryBean();
-        if (!ObjectUtils.isEmpty(this.properties.getPackagePath())) {
-            factory.setPackagePath(this.properties.getPackagePath());
-        }
-
-        factory.setProject(project);
-
-        return factory;
-    }
-
-    @Bean(name = "projectInfo")
-    @ConditionalOnBean({ApidocFactoryBean.class, RequestMappingHandlerMapping.class})
-    public Project getProjectInfo() {
-        Project projectInfo = new Project();
-        if (!ObjectUtils.isEmpty(this.properties.getTitle())) {
-            projectInfo.setName(this.properties.getTitle());
-        }
-        if (!ObjectUtils.isEmpty(this.properties.getDescription())) {
-            projectInfo.setDescription(this.properties.getDescription());
-        }
-//        projectInfo.buildProjectInfoFactory(apidocFactory);
-        return projectInfo;
+        return new Project().buildProject( requestMappingHandlerMapping);
     }
 }

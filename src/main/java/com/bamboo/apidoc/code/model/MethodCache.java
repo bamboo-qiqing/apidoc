@@ -1,4 +1,5 @@
 package com.bamboo.apidoc.code.model;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ public class MethodCache {
     private String moduleName;
 
     /**
-     * 数组下标
+     * 模块下标
      */
     private Integer moduleSubscript;
 
@@ -28,16 +29,16 @@ public class MethodCache {
     /**
      * 当前缓存方法
      */
-    private MethodInfo methodInfo;
+    private Method methodInfo;
 
-    private MethodCache(String moduleName, Integer moduleSubscript, Integer methodSubscript, MethodInfo methodInfo) {
+    private MethodCache(String moduleName, Integer moduleSubscript, Integer methodSubscript, Method methodInfo) {
         this.moduleName = moduleName;
         this.moduleSubscript = moduleSubscript;
         this.methodSubscript = methodSubscript;
         this.methodInfo = methodInfo;
     }
 
-    public static MethodCache buildMethod(String moduleName, Integer moduleSubscript, Integer methodSubscript, MethodInfo methodInfo) {
+    public static MethodCache buildMethod(String moduleName, Integer moduleSubscript, Integer methodSubscript, Method methodInfo) {
         return new MethodCache(moduleName, moduleSubscript, methodSubscript, methodInfo);
     }
 

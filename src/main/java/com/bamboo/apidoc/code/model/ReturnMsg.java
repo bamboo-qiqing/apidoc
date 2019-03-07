@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @Author: GuoQing
  * @Date: 2019/2/26 10:42
- * @description 接口返回
+ * @description 接口统一返回对象
  */
 @Data
 public class ReturnMsg implements Serializable {

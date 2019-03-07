@@ -19,7 +19,6 @@
                 console.log(key, keyPath);
             }
         }, mounted: function () {
-        <@axios />
 
         }
     })
