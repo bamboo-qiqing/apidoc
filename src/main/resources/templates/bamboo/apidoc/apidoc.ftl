@@ -13,12 +13,12 @@
     <el-row :gutter="24">
         <el-col :span="2">
             <div class="grid-content bg-purple">
-                <el-aside style="overflow:none!important;">
                     <el-menu style="border:none !important;overflow-y:none" v-if="project!=null"
                              default-active="2"
                              class="el-menu-vertical-demo">
                         <el-submenu v-for="(apidoc, index) in project.modules" :index="index">
                             <template slot="title">
+                                <i class="el-icon-menu"></i>
                                 <span>{{apidoc.name}}</span>
                             </template>
                             <el-menu-item-group v-for="(method, index) in apidoc.methods">
@@ -48,7 +48,6 @@
                             </el-menu-item-group>
                         </el-submenu>
                     </el-menu>
-                </el-aside>
             </div>
         </el-col>
         <el-col :span="18" :offset="2" v-if="currentApi!=null">
