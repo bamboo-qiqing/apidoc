@@ -93,6 +93,17 @@ public class IndexController {
     public ReturnMsg saveModel(@RequestParam(required = false) String name, @RequestParam String description) {
         return apiDocService.saveModel(name, description);
     }
+    /**
+     * 保存api
+     *
+     * @return 接口结果
+     */
+    @PostMapping("saveApi")
+    @ResponseBody
+    public ReturnMsg saveApi(@RequestParam(required = false) String name, @RequestParam String description) {
+        return apiDocService.saveModel(name, description);
+    }
+
 
 
     @GetMapping("updateProject")
@@ -112,6 +123,4 @@ public class IndexController {
     public ReturnMsg getToString(@PathVariable String test) {
         return new ReturnMsg(Status.SUCCESS);
     }
-
-
 }

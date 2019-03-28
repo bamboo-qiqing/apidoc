@@ -15,9 +15,17 @@ public class MethodInfo {
      */
     public final static Integer defaultVersion = 1;
     /**
+     * 方法id
+     */
+    private String id;
+    /**
      * 当前方法版本
      */
     private Integer version;
+    /**
+     * 模块id
+     */
+    private String modelId;
     /**
      * 方法基本信息
      */

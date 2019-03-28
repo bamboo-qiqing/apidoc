@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @Author: GuoQing
@@ -40,20 +41,18 @@ public class StringUtils extends StrUtil {
     }
 
 
-    public static String patternsSplice(Map.Entry<RequestMappingInfo, HandlerMethod> requestMappingInfoHandlerMethodEntry) {
-        MethodBasic methodBasic = MethodBasic.buildMethodBasic(requestMappingInfoHandlerMethodEntry.getKey(), requestMappingInfoHandlerMethodEntry.getValue());
+    public static String patternsSplice(Map.Entry<RequestMappingInfo, HandlerMethod> rem) {
+        MethodBasic methodBasic = MethodBasic.buildMethodBasic(rem.getKey(), rem.getValue());
         return patternsSplice(methodBasic);
     }
 
     public static String patternsSplice(MethodBasic methodBasic) {
         Set<RequestMethod> methodTypes = methodBasic.getMethodTypes();
-        String name = methodBasic.getName();
-        String className = methodBasic.getClassName();
         Set<String> routPaths = methodBasic.getRoutPaths();
-        return patternsSplice(routPaths, methodTypes, className, name);
+        return patternsSplice(routPaths, methodTypes);
     }
 
-    public static String patternsSplice(Set<String> routPaths, Set<RequestMethod> methodTypes, String className, String name) {
+    public static String patternsSplice(Set<String> routPaths, Set<RequestMethod> methodTypes) {
         StringBuilder url = new StringBuilder();
         if (routPaths != null && routPaths.size() > 0) {
             for (String urls : routPaths) {
@@ -67,12 +66,6 @@ public class StringUtils extends StrUtil {
                 url.append(",");
             }
         }
-        if (StrUtil.isNotBlank(className)) {
-            url.append(className);
-        }
-        if (StrUtil.isNotBlank(name)) {
-            url.append(name);
-        }
         return url.toString();
     }
 
@@ -83,12 +76,15 @@ public class StringUtils extends StrUtil {
      * @return JSON文件地址
      */
     public static String getJsonPath() {
-        String jsonpath = "";
-        try {
-            jsonpath = ResourceUtils.getURL("classpath:").getPath() + StringPool.JSON_PATH;
-        } catch (FileNotFoundException e) {
-            throw new ApiDocException("获取Json文件地址失败 错误信息为" + e);
-        }
-        return jsonpath;
+        return (System.getProperty("user.dir") + "/src/main/resources/"+StringPool.JSON_PATH).replace("\\","/");
+    }
+
+    /**
+     * 获取UUID
+     *
+     * @return 返回生成的UUID
+     */
+    public static String getUUID() {
+        return UUID.randomUUID().toString();
     }
 }

@@ -32,7 +32,7 @@
                 }
             }
         }, mounted: function () {
-
+            Object.assign(obj1, Name, Age);
         }
     })
 </script>

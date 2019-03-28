@@ -8,10 +8,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.bamboo.apidoc.code.exceptions.ApiDocException;
 import com.bamboo.apidoc.code.toolkit.StringUtils;
 import lombok.Data;
+import org.springframework.http.MediaType;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import javax.xml.ws.Response;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -62,6 +65,10 @@ public class Project {
      */
     private List<Module> modules;
     /**
+     * 方法集合
+     */
+    private List<Method> methods;
+    /**
      * Json地址
      */
     private String jsonPath = StringUtils.getJsonPath();
@@ -69,6 +76,7 @@ public class Project {
     private void initProject() {
         ArrayList<Module> modules = new ArrayList<>();
         modules.add(new Module().initModule());
+        methods=new ArrayList<>();
         this.modules = modules;
         this.largeVersion = Project.defaultLargeVersion;
         this.smallVersion = Project.defaultSmallVersion;
@@ -125,7 +133,7 @@ public class Project {
      * @return 所有模块
      */
     private Map<String, MethodCache> getAllMethods() {
-        return Module.getAllMethods(this.getModules());
+        return Module.getAllMethods(this.methods);
     }
 
     /**
@@ -135,7 +143,12 @@ public class Project {
      * @return 返回创建的File文件对象
      */
     private File compileJson(String jsonPath) {
+        File file1 = new File(jsonPath);
         File file = FileUtil.touch(jsonPath);
+
+        if(!file.canWrite()){
+            file.setWritable(true);
+        }
         FileWriter fileWriter = FileWriter.create(file);
         return fileWriter.write(JSONObject.toJSON(this).toString());
     }
@@ -180,34 +193,32 @@ public class Project {
      * @param handlerMethods Map<RequestMappingInfo, HandlerMethod>
      */
     private Project regenerate(Map<RequestMappingInfo, HandlerMethod> handlerMethods) {
+        //获取历史方法集合
         Map<String, MethodCache> allMethods = this.getAllMethods();
         //遍历所有Spring处理器获取到的方法
         for (Map.Entry<RequestMappingInfo, HandlerMethod> handlerMethod : handlerMethods.entrySet()) {
+            if("/error".equals(handlerMethod.getKey().getPatternsCondition().getPatterns()))
+                break;
             //根据拼接的Url检测已存在方法中是否存在该接口
             if (allMethods != null) {
                 MethodCache methodCache = allMethods.get(StringUtils.patternsSplice(handlerMethod));
                 Method newmethod = Method.buildMethod(handlerMethod.getKey(), handlerMethod.getValue());
                 //不存在则生成，存入未分配模块
                 if (methodCache == null) {
-                    //获取未分配模块下标
-                    int oneModuleByName = Module.getOneModuleByName(this.getModules(), Module.UNALLOCATED);
-                    if (oneModuleByName > -1) {
-                        List<Method> methods = this.getModules().get(oneModuleByName).getMethods();
+                    //获取未分配模块Id
+                    String moduleId = Module.getModuleIdByName(this.getModules(), Module.UNALLOCATED);
+                    if (StringUtils.isNotBlank(moduleId)) {
                         newmethod.setCheckVersion(this.largeVersion + "." + this.smallVersion);
-                        if (methods == null || methods.size() < 1) {
-                            methods = new ArrayList<>();
-                            this.getModules().get(oneModuleByName).setMethods(methods);
-                        }
-                        methods.add(newmethod);
+                        newmethod.getMethodInfo().setModelId(moduleId);
+                        this.methods.add(newmethod);
                     }
                 } else {
-                    Method metho = methodCache.getMethodInfo();
-                    Method method = this.getModules().get(methodCache.getModuleSubscript()).getMethods().get(methodCache.getMethodSubscript());
-                    method.setCheckVersion(this.largeVersion + "." + this.smallVersion);
+                    methodCache.getMethodInfo().setCheckVersion(this.largeVersion + "." + this.smallVersion);
                     if (newmethod != null) {
-                        if (newmethod.isChange(metho)) {
+                        if (newmethod.isChange(methodCache.getMethodInfo())) {
                             MethodMark methodMark = newmethod.getMethodInfo().getMethodBasic().getMethodMark(Boolean.TRUE);
-                            method.setMethodMark(methodMark);
+                            methodCache.getMethodInfo().setMethodMark(methodMark);
+                            this.methods.add(methodCache.getMethodSubscript(), methodCache.getMethodInfo());
                         }
                     }
                 }

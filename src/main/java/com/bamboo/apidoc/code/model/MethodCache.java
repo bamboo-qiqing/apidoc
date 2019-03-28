@@ -12,16 +12,6 @@ import lombok.Setter;
 @Setter
 public class MethodCache {
     /**
-     * 模块名
-     */
-    private String moduleName;
-
-    /**
-     * 模块下标
-     */
-    private Integer moduleSubscript;
-
-    /**
      * 方法下标
      */
     private Integer methodSubscript;
@@ -31,15 +21,13 @@ public class MethodCache {
      */
     private Method methodInfo;
 
-    private MethodCache(String moduleName, Integer moduleSubscript, Integer methodSubscript, Method methodInfo) {
-        this.moduleName = moduleName;
-        this.moduleSubscript = moduleSubscript;
+    private MethodCache(Integer methodSubscript, Method methodInfo) {
         this.methodSubscript = methodSubscript;
         this.methodInfo = methodInfo;
     }
 
-    public static MethodCache buildMethod(String moduleName, Integer moduleSubscript, Integer methodSubscript, Method methodInfo) {
-        return new MethodCache(moduleName, moduleSubscript, methodSubscript, methodInfo);
+    public static MethodCache buildMethod(Integer methodSubscript, Method methodInfo) {
+        return new MethodCache(methodSubscript, methodInfo);
     }
 
 }
