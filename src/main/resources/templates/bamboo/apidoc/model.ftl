@@ -5,7 +5,6 @@
     .read-only input {
         border: 0px;
     }
-
     .el-menu-item, .el-submenu__title {
         height: 100%;
     }
@@ -40,11 +39,7 @@
                                               v-model="currentModel.name">
                                     </el-input>
                                 </el-form-item>
-                                <el-form-item v-if="!edit.flag" label="接口数量:">
-                                    <el-input readonly="true" class="read-only"
-                                              v-model="currentModel.methods.length">
-                                    </el-input>
-                                </el-form-item>
+
                                 <el-form-item label="模块说明:">
                                     <el-input v-if="edit.flag"
                                               type="textarea"
@@ -136,7 +131,7 @@
                             message: '保存失败',
                             type: 'warning'
                         });
-                        this.getJson();
+                        _this.getJson();
                     }
                 });
             }

@@ -40,7 +40,7 @@ public class ApiDocServiceImpl implements ApiDocService {
             Project projec = Project.getProject();
             String id = Module.getModuleIdByName(projec.getModules(), name);
             List<Module> modules = projec.getModules();
-            if (StringUtils.isNotBlank(id)) {
+            if (StringUtils.isBlank(id)) {
                 Module module = new Module();
                 module.setName(name);
                 module.setDescription(description);
@@ -58,9 +58,18 @@ public class ApiDocServiceImpl implements ApiDocService {
         return new ReturnMsg(Status.SUCCESS, "成功");
     }
 
-    @Override
-    public ReturnMsg saveModel(Method method, String moldelName) {
 
-        return null;
+    @Override
+    public ReturnMsg saveApi(Method method) {
+        Project projec = Project.getProject();
+        for (Method metho : projec.getMethods()) {
+            if (metho.getMethodInfo().getId().equals(method.getMethodInfo().getId())) {
+                metho.setMethodInfo(method.getMethodInfo());
+            }else {
+                ReturnMsg.returnMsg(Status.ERROR, "该接口已不存在");
+            }
+        }
+        projec.submitJson();
+        return ReturnMsg.returnMsg(Status.SUCCESS, "成功");
     }
 }

@@ -1,5 +1,6 @@
 package com.bamboo.apidoc.code.model;
 
+import com.bamboo.apidoc.code.toolkit.StringUtils;
 import lombok.Data;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,6 +86,7 @@ public class MethodBasic {
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setMethodBasic(this);
         methodInfo.setVersion(version);
+        methodInfo.setId(StringUtils.getUUID());
         return methodInfo;
     }
     /**

@@ -33,5 +33,7 @@ public interface ApiDocService {
      *
      * @return 返回保存结果
      */
-    ReturnMsg saveModel(Method method, String moldelName);
+    ReturnMsg saveApi(Method method);
+
+
 }

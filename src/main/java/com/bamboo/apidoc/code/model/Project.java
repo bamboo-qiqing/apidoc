@@ -76,7 +76,7 @@ public class Project {
     private void initProject() {
         ArrayList<Module> modules = new ArrayList<>();
         modules.add(new Module().initModule());
-        methods=new ArrayList<>();
+        methods = new ArrayList<>();
         this.modules = modules;
         this.largeVersion = Project.defaultLargeVersion;
         this.smallVersion = Project.defaultSmallVersion;
@@ -146,7 +146,7 @@ public class Project {
         File file1 = new File(jsonPath);
         File file = FileUtil.touch(jsonPath);
 
-        if(!file.canWrite()){
+        if (!file.canWrite()) {
             file.setWritable(true);
         }
         FileWriter fileWriter = FileWriter.create(file);
@@ -197,8 +197,9 @@ public class Project {
         Map<String, MethodCache> allMethods = this.getAllMethods();
         //遍历所有Spring处理器获取到的方法
         for (Map.Entry<RequestMappingInfo, HandlerMethod> handlerMethod : handlerMethods.entrySet()) {
-            if("/error".equals(handlerMethod.getKey().getPatternsCondition().getPatterns()))
+            if (handlerMethod.getKey().getPatternsCondition().getPatterns().contains("/error")) {
                 break;
+            }
             //根据拼接的Url检测已存在方法中是否存在该接口
             if (allMethods != null) {
                 MethodCache methodCache = allMethods.get(StringUtils.patternsSplice(handlerMethod));

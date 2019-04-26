@@ -2,6 +2,7 @@ package com.bamboo.apidoc.web;
 
 
 import com.bamboo.apidoc.code.enums.Status;
+import com.bamboo.apidoc.code.model.Method;
 import com.bamboo.apidoc.code.model.Project;
 import com.bamboo.apidoc.code.model.ReturnMsg;
 import com.bamboo.apidoc.service.ApiDocService;
@@ -93,6 +94,7 @@ public class IndexController {
     public ReturnMsg saveModel(@RequestParam(required = false) String name, @RequestParam String description) {
         return apiDocService.saveModel(name, description);
     }
+
     /**
      * 保存api
      *
@@ -100,11 +102,9 @@ public class IndexController {
      */
     @PostMapping("saveApi")
     @ResponseBody
-    public ReturnMsg saveApi(@RequestParam(required = false) String name, @RequestParam String description) {
-        return apiDocService.saveModel(name, description);
+    public ReturnMsg saveApi(@RequestBody Method method) {
+        return apiDocService.saveApi(method);
     }
-
-
 
     @GetMapping("updateProject")
     @ResponseBody
