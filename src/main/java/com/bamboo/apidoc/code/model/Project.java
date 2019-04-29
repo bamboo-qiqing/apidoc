@@ -143,7 +143,6 @@ public class Project {
    * @return 返回创建的File文件对象
    */
   private File compileJson(String jsonPath) {
-    File file1 = new File(jsonPath);
     File file = FileUtil.touch(jsonPath);
 
     if (!file.canWrite()) {
@@ -202,6 +201,7 @@ public class Project {
       }
       //根据拼接的Url检测已存在方法中是否存在该接口
       if (allMethods != null) {
+
         MethodCache methodCache = allMethods.get(StringUtils.patternsSplice(handlerMethod));
         Method newmethod = Method.buildMethod(handlerMethod.getKey(), handlerMethod.getValue());
         //不存在则生成，存入未分配模块
@@ -216,10 +216,8 @@ public class Project {
         } else {
           methodCache.getMethodInfo().setCheckVersion(this.largeVersion + "." + this.smallVersion);
           if (newmethod != null) {
-            if (newmethod.isChange(methodCache.getMethodInfo())) {
-              MethodMark methodMark = newmethod.getMethodInfo().getMethodBasic().getMethodMark(Boolean.TRUE);
-              methodCache.getMethodInfo().setMethodMark(methodMark);
-              this.methods.add(methodCache.getMethodSubscript(), methodCache.getMethodInfo());
+            if (methodCache.getMethodInfo().isChange(newmethod)) {
+              this.methods.set(methodCache.getMethodSubscript(), methodCache.getMethodInfo());
             }
           }
         }

@@ -88,6 +88,7 @@ public class Module {
     if (!methods.isEmpty()) {
       for (int i = 0; i < methods.size(); i++) {
         MethodBasic methodBasic = methods.get(i).getMethodInfo().getMethodBasic();
+
         methodCacheMap.put(StringUtils.patternsSplice(methodBasic), MethodCache.buildMethod(i, methods.get(i)));
       }
 

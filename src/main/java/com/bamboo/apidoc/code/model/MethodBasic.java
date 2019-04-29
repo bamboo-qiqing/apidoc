@@ -1,5 +1,6 @@
 package com.bamboo.apidoc.code.model;
 
+import com.bamboo.apidoc.code.enums.ChangeType;
 import com.bamboo.apidoc.code.toolkit.StringUtils;
 import lombok.Data;
 import org.springframework.util.Assert;
@@ -7,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
-import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -51,10 +52,7 @@ public class MethodBasic {
    * 方法参数
    */
   private ArrayList<Param> params;
-  /**
-   * 返回类型
-   */
-  private Object returnType;
+
 
   /**
    * 根据 RequestMappingInfo 和 handler 构建Method对象
@@ -73,6 +71,7 @@ public class MethodBasic {
     methodInfo.setPackageName(handler.getMethod().getDeclaringClass().getPackage().getName());
     methodInfo.setClassName(handler.getMethod().getDeclaringClass().getName());
     methodInfo.setParams(Param.buildParams(handler));
+
     return methodInfo;
   }
 
@@ -102,5 +101,27 @@ public class MethodBasic {
     methodMark.setChange(ischange == null ? Boolean.FALSE : ischange);
     methodMark.setMethodBasic(this);
     return methodMark;
+  }
+
+  /**
+   * 和当前对象比较，判断是否相同
+   *
+   * @return 返回不同之处的改变类型
+   */
+  public List<ChangeType> equals(MethodBasic methodBasic) {
+    List<ChangeType> changeTypes = new ArrayList<>();
+    if (!(this.name != null && this.name.equals(methodBasic.getName()))) {
+      changeTypes.add(ChangeType.name);
+    }
+    if (!(this.packageName != null && this.packageName.equals(methodBasic.getPackageName()))) {
+      changeTypes.add(ChangeType.packageName);
+    }
+    if (!(this.className != null && this.className.equals(methodBasic.getClassName()))) {
+      changeTypes.add(ChangeType.className);
+    }
+    if (!(this.routPaths != null && this.routPaths.equals(methodBasic.getRoutPaths()))) {
+      changeTypes.add(ChangeType.routPaths);
+    }
+    return changeTypes;
   }
 }

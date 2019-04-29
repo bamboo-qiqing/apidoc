@@ -1,6 +1,9 @@
 package com.bamboo.apidoc.code.model;
 
+import com.bamboo.apidoc.code.enums.ChangeType;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Author: GuoQing
@@ -18,6 +21,10 @@ public class MethodMark {
    * 改动后的接口
    */
   private MethodBasic methodBasic;
+  /**
+   * 改变类型
+   */
+  private List<ChangeType> changeType;
 
 
 }

@@ -1,8 +1,11 @@
 package com.bamboo.apidoc.code.model;
 
+import com.bamboo.apidoc.code.enums.ChangeType;
 import lombok.Data;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+
+import java.util.List;
 
 /**
  * @Author: GuoQing
@@ -52,10 +55,23 @@ public class Method {
     return method;
   }
 
-
+  /**
+   * 比较当前类和传入类的不同，同时写入改动信息
+   *
+   * @param newMethodInfo 新方法
+   * @return 返回是否有改动
+   */
   boolean isChange(MethodBasic newMethodInfo) {
     if (newMethodInfo != null) {
-      return !newMethodInfo.equals(this.getMethodInfo().getMethodBasic());
+      List<ChangeType> changeTypes = newMethodInfo.equals(this.getMethodInfo().getMethodBasic());
+      if (changeTypes != null && changeTypes.size() > 0) {
+        MethodMark methodMark = newMethodInfo.getMethodMark(Boolean.TRUE);
+        methodMark.setChangeType(changeTypes);
+        this.methodMark = methodMark;
+        return true;
+      } else {
+        return false;
+      }
     }
     return false;
   }

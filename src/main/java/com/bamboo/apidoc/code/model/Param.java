@@ -1,8 +1,8 @@
 package com.bamboo.apidoc.code.model;
 
 
+import com.bamboo.apidoc.code.enums.ParamType;
 import com.bamboo.apidoc.code.toolkit.ObjectUtil;
-import com.bamboo.apidoc.code.toolkit.StringPool;
 import lombok.*;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.util.Assert;
@@ -17,8 +17,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @Author: GuoQing
@@ -52,7 +50,10 @@ public class Param {
    * 参数描述
    */
   private String description;
-
+  /**
+   * 创建类型，用来记录当前参数是由系统生成或者前端填入
+   */
+  private String creatType;
 
   public static ArrayList<Param> buildParams(HandlerMethod handler) {
     Assert.notNull(handler, "HandlerMethod must not be null");
@@ -85,6 +86,8 @@ public class Param {
         param.setType(parameterTypes[i].getName());
         param.setIsNull(isNull(parameterAnnotations[i]));
         params.add(param);
+      } else if (ObjectUtil.map.get(parameterTypes[i]) != null) {
+        params.add(new Param(parameterNames[i], ObjectUtil.map.get(parameterTypes[i])));
       } else {
         try {
           getParam(parameterTypes[i], params);
@@ -131,19 +134,19 @@ public class Param {
     Field[] declaredFields = clazz.getDeclaredFields();
     for (Field field : declaredFields) {
       if (field.getType().isPrimitive()) {
-        params.add(new Param(field.getName(), field.getType().getTypeName(), null, "", ""));
+        params.add(new Param(field.getName(), field.getType().getTypeName()));
       } else {
         if (ObjectUtil.map.get(field.getType()) != null) {
-          params.add(new Param(field.getName(), ObjectUtil.map.get(field.getType()), null, "", ""));
+          params.add(new Param(field.getName(), ObjectUtil.map.get(field.getType())));
         } else {
           if (ObjectUtil.set.get(field.getType()) != null) {
             ParameterizedType listGenericType = (ParameterizedType) field.getGenericType();
             Type[] listActualTypeArguments = listGenericType.getActualTypeArguments();
             Class<?> classType = Class.forName(listActualTypeArguments[listActualTypeArguments.length - 1].getTypeName());
             if (classType.isInterface()) {
-              params.add(new Param(field.getName(), "接口类型", null, "", ""));
+              params.add(new Param(field.getName(), "Interface"));
             } else if (classType.isEnum()) {
-              params.add(new Param(field.getName(), ObjectUtil.map.get(Enum.class), null, "", ""));
+              params.add(new Param(field.getName(), ObjectUtil.map.get(Enum.class)));
             } else {
               getParam(classType, params);
             }
@@ -155,6 +158,23 @@ public class Param {
       }
 
     }
+  }
 
+  public Param(String name, String type, String creatType) {
+    this.name = name;
+    this.type = type;
+    this.isNull = true;
+    this.length = "";
+    this.description = "";
+    this.creatType = creatType;
+  }
+
+  public Param(String name, String type) {
+    this.name = name;
+    this.type = type;
+    this.isNull = true;
+    this.length = "";
+    this.description = "";
+    this.creatType = ParamType.SYS.toString();
   }
 }
