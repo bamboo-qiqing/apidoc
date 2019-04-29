@@ -12,16 +12,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 public class ApiDocProperties {
 
-    /**
-     * 管理员账号
-     */
-    private String username;
-    /**
-     * 管理员密码
-     */
-    private String password;
-    /**
-     * 文件地址
-     */
-    private  String jsonPath;
+  /**
+   * 管理员账号
+   */
+  private String username;
+  /**
+   * 管理员密码
+   */
+  private String password;
+  /**
+   * 文件地址
+   */
+  private String jsonPath;
 }

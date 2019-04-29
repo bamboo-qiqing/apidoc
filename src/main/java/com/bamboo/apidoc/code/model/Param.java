@@ -2,7 +2,7 @@ package com.bamboo.apidoc.code.model;
 
 
 import com.bamboo.apidoc.code.toolkit.StringPool;
-import lombok.Data;
+import lombok.*;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,11 @@ import java.lang.reflect.Method;
  * @Date: 2019/2/13 16:47
  * @description 路由参数详情
  */
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Param {
 
     /**
@@ -33,6 +37,14 @@ public class Param {
      * 参数是否可以置空
      */
     private Boolean isNull;
+    /**
+     * 参数长度
+     */
+    private String length;
+    /**
+     * 参数描述
+     */
+    private  String description;
 
 
     public static Param[] buildParams(HandlerMethod handler) {

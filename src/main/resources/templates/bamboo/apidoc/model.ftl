@@ -5,6 +5,7 @@
     .read-only input {
         border: 0px;
     }
+
     .el-menu-item, .el-submenu__title {
         height: 100%;
     }

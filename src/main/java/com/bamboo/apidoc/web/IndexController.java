@@ -18,109 +18,101 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("bamboo")
 public class IndexController {
-    @Autowired
-    private ApiDocService apiDocService;
+  @Autowired
+  private ApiDocService apiDocService;
 
-    /**
-     * 跳转index界面
-     *
-     * @return 返回
-     */
-    @GetMapping("index")
-    public String toIndex() {
-        return "bamboo/apidoc/index";
-    }
+  /**
+   * 跳转index界面
+   *
+   * @return 返回
+   */
+  @GetMapping("index")
+  public String toIndex() {
+    return "bamboo/apidoc/index";
+  }
 
-    /**
-     * 跳转项目信息页面
-     *
-     * @return 跳转项目信息界面
-     */
-    @GetMapping("project")
-    public String toProject() {
-        return "bamboo/apidoc/project";
-    }
+  /**
+   * 跳转项目信息页面
+   *
+   * @return 跳转项目信息界面
+   */
+  @GetMapping("project")
+  public String toProject() {
+    return "bamboo/apidoc/project";
+  }
 
-    /**
-     * 跳转文档界面
-     *
-     * @return 跳转文档界面
-     */
-    @GetMapping("apidoc")
-    public String toApidoc() {
-        return "bamboo/apidoc/apidoc";
-    }
+  /**
+   * 跳转统计图页面
+   *
+   * @return 跳转统计图页面
+   */
+  @GetMapping("statistics")
+  public String toStatistics() {
+    return "bamboo/apidoc/statistics";
+  }
 
-    /**
-     * 跳转文档界面
-     *
-     * @return 跳转文档界面
-     */
-    @GetMapping("model")
-    public String toModel() {
-        return "bamboo/apidoc/model";
-    }
+  /**
+   * 跳转文档界面
+   *
+   * @return 跳转文档界面
+   */
+  @GetMapping("apidoc")
+  public String toApidoc() {
+    return "bamboo/apidoc/apidoc";
+  }
 
-    /**
-     * 获取JSON数据
-     *
-     * @return 返回JSON文件读取到的信息
-     */
-    @GetMapping("getJson")
-    @ResponseBody
-    public ReturnMsg getJson() {
-        return new ReturnMsg(Status.SUCCESS, Project.getProject());
-    }
+  /**
+   * 跳转文档界面
+   *
+   * @return 跳转文档界面
+   */
+  @GetMapping("model")
+  public String toModel() {
+    return "bamboo/apidoc/model";
+  }
 
-    /**
-     * 修改项目信息接口
-     *
-     * @param project 项目信息
-     * @return 接口结果
-     */
-    @PostMapping("updateProject")
-    @ResponseBody
-    public ReturnMsg updateJson(@RequestBody Project project) {
-        return apiDocService.updateProject(project);
-    }
+  /**
+   * 获取JSON数据
+   *
+   * @return 返回JSON文件读取到的信息
+   */
+  @GetMapping("getJson")
+  @ResponseBody
+  public ReturnMsg getJson() {
+    return new ReturnMsg(Status.SUCCESS, Project.getProject());
+  }
 
-    /**
-     * 保存moldel
-     *
-     * @return 接口结果
-     */
-    @PostMapping("saveModel")
-    @ResponseBody
-    public ReturnMsg saveModel(@RequestParam(required = false) String name, @RequestParam String description) {
-        return apiDocService.saveModel(name, description);
-    }
+  /**
+   * 修改项目信息接口
+   *
+   * @param project 项目信息
+   * @return 接口结果
+   */
+  @PostMapping("updateProject")
+  @ResponseBody
+  public ReturnMsg updateJson(@RequestBody Project project) {
+    return apiDocService.updateProject(project);
+  }
 
-    /**
-     * 保存api
-     *
-     * @return 接口结果
-     */
-    @PostMapping("saveApi")
-    @ResponseBody
-    public ReturnMsg saveApi(@RequestBody Method method) {
-        return apiDocService.saveApi(method);
-    }
+  /**
+   * 保存moldel
+   *
+   * @return 接口结果
+   */
+  @PostMapping("saveModel")
+  @ResponseBody
+  public ReturnMsg saveModel(@RequestParam(required = false) String name, @RequestParam String description) {
+    return apiDocService.saveModel(name, description);
+  }
 
-    @GetMapping("updateProject")
-    @ResponseBody
-    public ReturnMsg updateJson(@RequestParam(required = false) int test) {
-        return new ReturnMsg(Status.SUCCESS);
-    }
-
-    @GetMapping("getToString")
-    @ResponseBody
-    public ReturnMsg getToString(@RequestBody Object o) {
-        return new ReturnMsg(Status.SUCCESS);
-    }
-
-    @GetMapping("getToString/{test}")
-    @ResponseBody
-    public ReturnMsg getToString(@PathVariable String test) {
-        return new ReturnMsg(Status.SUCCESS);
-    }
+  /**
+   * 保存api
+   *
+   * @return 接口结果
+   */
+  @PostMapping("saveApi")
+  @ResponseBody
+  public ReturnMsg saveApi(@RequestBody Method method) {
+    return apiDocService.saveApi(method);
+  }
 }

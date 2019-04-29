@@ -20,15 +20,15 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @EnableConfigurationProperties(ApiDocProperties.class)
 public class ApidocAutoConfiguration {
 
-    private ApiDocProperties properties;
+  private ApiDocProperties properties;
 
-    ApidocAutoConfiguration(ApiDocProperties properties) {
-        this.properties = properties;
-    }
+  ApidocAutoConfiguration(ApiDocProperties properties) {
+    this.properties = properties;
+  }
 
-    @Bean(name = "project")
-    @ConditionalOnBean({RequestMappingHandlerMapping.class})
-    public Project project(@Autowired RequestMappingHandlerMapping requestMappingHandlerMapping) {
-        return new Project().buildProject(requestMappingHandlerMapping);
-    }
+  @Bean(name = "project")
+  @ConditionalOnBean({RequestMappingHandlerMapping.class})
+  public Project project(@Autowired RequestMappingHandlerMapping requestMappingHandlerMapping) {
+    return new Project().buildProject(requestMappingHandlerMapping);
+  }
 }

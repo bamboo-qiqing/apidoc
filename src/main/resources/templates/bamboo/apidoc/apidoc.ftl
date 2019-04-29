@@ -27,7 +27,8 @@
                             <el-menu-item :index="method.methodInfo.methodBasic.routPaths"
                                           @click="currentApiInfo(method)">
                                 <el-row>
-                                    <el-col v-if="method.methodInfo.methodBasic.chineseName==null" :span="20">
+                                    <el-col v-if="method.methodInfo.methodBasic.chineseName==null||method.methodInfo.methodBasic.chineseName==''"
+                                            :span="20">
                                         <template v-for="url in method.methodInfo.methodBasic.routPaths">
                                             <el-col :span="2"
                                                     v-if="checkVersion!=method.checkVersion && method.methodMark.change">
@@ -98,7 +99,7 @@
                             </el-input>
                         </el-form-item>
 
-                        <el-form-item label="接口说明:">
+                        <el-form-item label="参数说明:">
                             <div class="table-responsive">
                                 <table class="table table-hover table-bordered">
                                     <tr>
@@ -161,12 +162,11 @@
         methods: {
             save() {
                 var _this = this;
-                console.log(_this.currentApi)
                 $.ajax({
                     type: "post",
                     url: '/bamboo/saveApi',
                     dataType: "json",
-                    data:JSON.stringify( _this.currentApi),
+                    data: JSON.stringify(_this.currentApi),
                     contentType: "application/json",
                     success: function (data) {
                         console.log(data);
@@ -198,24 +198,26 @@
                     responseType: 'json',
                     transformResponse: [function (data) {
                         _this.project = data.result;
-                        console.log(_this.project);
                         _this.checkVersion = data.result.largeVersion + '.' + data.result.smallVersion;
                         return data;
                     }]
                 })
-            }, getCurrentModel(id) {
+            }, getCurrentModel() {
                 let _this = this;
                 let modes = _this.project.modules;
                 for (let i = 0; i < modes.length; i++) {
-                    if (modes[i].id = _this.currentApi.methodInfo.modelId) {
+                    if (modes[i].id == _this.currentApi.methodInfo.modelId) {
                         return modes[i].name;
                     }
                 }
             }
-        }, mounted: function () {
+        },
+        mounted: function () {
             this.getJson();
+
         }
-    });
+    })
+    ;
 
 
 </script>

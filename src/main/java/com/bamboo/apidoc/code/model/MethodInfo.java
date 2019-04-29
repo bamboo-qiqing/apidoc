@@ -10,24 +10,24 @@ import lombok.Data;
  */
 @Data
 public class MethodInfo {
-    /**
-     * 版本默认初始值
-     */
-    public final static Integer defaultVersion = 1;
-    /**
-     * 方法id
-     */
-    private String id;
-    /**
-     * 当前方法版本
-     */
-    private Integer version;
-    /**
-     * 模块id
-     */
-    private String modelId;
-    /**
-     * 方法基本信息
-     */
-    private MethodBasic methodBasic;
+  /**
+   * 版本默认初始值
+   */
+  public final static Integer defaultVersion = 1;
+  /**
+   * 方法id
+   */
+  private String id;
+  /**
+   * 当前方法版本
+   */
+  private Integer version;
+  /**
+   * 模块id
+   */
+  private String modelId;
+  /**
+   * 方法基本信息
+   */
+  private MethodBasic methodBasic;
 }

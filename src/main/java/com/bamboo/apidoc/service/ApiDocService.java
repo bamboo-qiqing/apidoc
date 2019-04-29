@@ -11,29 +11,29 @@ import com.bamboo.apidoc.code.model.ReturnMsg;
  */
 public interface ApiDocService {
 
-    /**
-     * 更新项目信息
-     *
-     * @param project 参数
-     * @return 修改结果
-     */
-    ReturnMsg updateProject(Project project);
+  /**
+   * 更新项目信息
+   *
+   * @param project 参数
+   * @return 修改结果
+   */
+  ReturnMsg updateProject(Project project);
 
-    /**
-     * 保存模块
-     *
-     * @param name        模块名
-     * @param description 模块描述
-     * @return 返回保存结果
-     */
-    ReturnMsg saveModel(String name, String description);
+  /**
+   * 保存模块
+   *
+   * @param name        模块名
+   * @param description 模块描述
+   * @return 返回保存结果
+   */
+  ReturnMsg saveModel(String name, String description);
 
-    /**
-     * 保存apidoc
-     *
-     * @return 返回保存结果
-     */
-    ReturnMsg saveApi(Method method);
+  /**
+   * 保存apidoc
+   *
+   * @return 返回保存结果
+   */
+  ReturnMsg saveApi(Method method);
 
 
 }

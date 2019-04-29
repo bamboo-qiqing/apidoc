@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="/bamboo/apidoc">API文档</a></li>
-                    <li><a href="/bamboo/project">统计图</a></li>
+                    <li><a href="/bamboo/statistics">统计图</a></li>
                     <li><a href="/bamboo/model">模块管理</a></li>
                     <li><a href="/bamboo/user">成员管理</a></li>
                     <li><a href="/bamboo/project">项目信息</a></li>

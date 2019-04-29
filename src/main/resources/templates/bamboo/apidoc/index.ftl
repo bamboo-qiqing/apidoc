@@ -21,7 +21,7 @@
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
-            },modeSwitching() {
+            }, modeSwitching() {
                 let _this = this;
                 if (_this.edit.flag) {
                     _this.edit.flag = false;
